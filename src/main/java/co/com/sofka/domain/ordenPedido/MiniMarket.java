@@ -1,4 +1,8 @@
 package co.com.sofka.domain.ordenPedido;
 
-public class MiniMarket {
+import co.com.sofka.domain.generic.Identity;
+
+public class MiniMarket extends Identity {
+
+
 }

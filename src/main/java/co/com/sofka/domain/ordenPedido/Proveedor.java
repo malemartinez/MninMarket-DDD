@@ -1,4 +1,7 @@
 package co.com.sofka.domain.ordenPedido;
 
-public class Proveedor {
+import co.com.sofka.domain.generic.Identity;
+
+public class Proveedor extends Identity {
+
 }

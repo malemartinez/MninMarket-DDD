@@ -1,4 +1,6 @@
 package co.com.sofka.domain.ordenPedido;
 
-public class Producto {
+import co.com.sofka.domain.generic.Identity;
+
+public class Producto extends Identity {
 }
