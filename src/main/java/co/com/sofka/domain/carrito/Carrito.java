@@ -23,6 +23,7 @@ public class Carrito extends AggregateEvent<carritoID> {
 
     private Carrito(carritoID entityId) {
         super(entityId);
+        subscribe(new CarritoChange(this));
 
     }
 
@@ -40,9 +41,9 @@ public class Carrito extends AggregateEvent<carritoID> {
         appendChange(new ProductoEliminado(entityId)).apply();
     }
 
-    public void vaciarCarrito(){
+    public void vaciarCarrito(List<Producto> productos){
         //Objects.requireNonNull(entityId);
-        appendChange(new CarritoVaciado()).apply();
+        appendChange(new CarritoVaciado(productos)).apply();
     }
 
     public void generarFactura(Cajero cajero, Cliente cliente, List<Producto> productos, MetodoPago metodoPago){
@@ -50,7 +51,7 @@ public class Carrito extends AggregateEvent<carritoID> {
         Objects.requireNonNull(cliente);
         Objects.requireNonNull(productos);
         Objects.requireNonNull(metodoPago);
-        appendChange(new FacturaGenerada()).apply();
+        appendChange(new FacturaGenerada(cajero,cliente,productos,metodoPago)).apply();
     }
 
     public void actualizarNombreCliente(Cliente cliente){
@@ -63,14 +64,14 @@ public class Carrito extends AggregateEvent<carritoID> {
         appendChange(new TelefonoClienteActualizado(cliente)).apply();
     }
 
-    public void actualizarNombreCajero(Cliente cliente){
-        Objects.requireNonNull(cliente);
-        appendChange(new NombreCajeroActualizado(cliente)).apply();
+    public void actualizarNombreCajero(Cajero cajero){
+        Objects.requireNonNull(cajero);
+        appendChange(new NombreCajeroActualizado(cajero)).apply();
     }
 
-    public void actualizarTelefonoCajero(Cliente cliente){
-        Objects.requireNonNull(cliente);
-        appendChange(new TelefonoCajeroActualizado(cliente)).apply();
+    public void actualizarTelefonoCajero(Cajero cajero){
+        Objects.requireNonNull(cajero);
+        appendChange(new TelefonoCajeroActualizado(cajero)).apply();
     }
 
     public Cajero Cajero() {
