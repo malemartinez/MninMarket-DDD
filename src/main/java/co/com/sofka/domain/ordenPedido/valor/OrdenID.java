@@ -1,7 +1,6 @@
-package co.com.sofka.domain.ordenPedido;
+package co.com.sofka.domain.ordenPedido.valor;
 
 import co.com.sofka.domain.generic.Identity;
-import co.com.sofka.domain.ordenPedido.valor.TiendaId;
 
 public class OrdenID extends Identity {
 
