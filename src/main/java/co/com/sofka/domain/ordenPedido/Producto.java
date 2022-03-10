@@ -31,4 +31,20 @@ public class Producto extends Entity<ProductoId> {
     public void actualizarDescripcion(Descripcion nuevaDescripcion){
         this.descripcion = Objects.requireNonNull(nuevaDescripcion);
     }
+
+    public ProductoId getProductoId() {
+        return productoId;
+    }
+
+    public Precio getPrecio() {
+        return precio;
+    }
+
+    public Descripcion getDescripcion() {
+        return descripcion;
+    }
+
+    public Nombre getNombre() {
+        return nombre;
+    }
 }

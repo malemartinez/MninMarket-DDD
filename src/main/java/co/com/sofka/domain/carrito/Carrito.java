@@ -39,4 +39,37 @@ public class Carrito extends AggregateEvent<carritoID> {
         Objects.requireNonNull(entityId);
         appendChange(new ProductoEliminado(entityId)).apply();
     }
+
+    public void vaciarCarrito(){
+        //Objects.requireNonNull(entityId);
+        appendChange(new CarritoVaciado()).apply();
+    }
+
+    public void generarFactura(Cajero cajero, Cliente cliente, List<Producto> productos, MetodoPago metodoPago){
+        Objects.requireNonNull(cajero);
+        Objects.requireNonNull(cliente);
+        Objects.requireNonNull(productos);
+        Objects.requireNonNull(metodoPago);
+        appendChange(new FacturaGenerada()).apply();
+    }
+
+    public void actualizarNombreCliente(Cliente cliente){
+        Objects.requireNonNull(cliente);
+        appendChange(new NombreClienteActualizado(cliente)).apply();
+    }
+
+    public void actualizarTelefonoCliente(Cliente cliente){
+        Objects.requireNonNull(cliente);
+        appendChange(new TelefonoClienteActualizado(cliente)).apply();
+    }
+
+    public void actualizarNombreCajero(Cliente cliente){
+        Objects.requireNonNull(cliente);
+        appendChange(new NombreCajeroActualizado(cliente)).apply();
+    }
+
+    public void actualizarTelefonoCajero(Cliente cliente){
+        Objects.requireNonNull(cliente);
+        appendChange(new TelefonoCajeroActualizado(cliente)).apply();
+    }
 }
