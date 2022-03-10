@@ -3,16 +3,21 @@ package co.com.sofka.domain.ordenPedido.valor;
 import co.com.sofka.domain.generic.ValueObject;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class Fecha implements ValueObject<LocalDateTime> {
-    private final LocalDateTime fechaOrden;
+public class Fecha implements ValueObject<String> {
 
-    public Fecha(LocalDateTime fechaOrden) {
-        this.fechaOrden = fechaOrden;
+    DateTimeFormatter dtf4 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+
+    private final LocalDateTime value= LocalDateTime.now();
+
+    public Fecha() {
+
     }
 
     @Override
-    public LocalDateTime value() {
-        return null;
+    public String value() {
+        return dtf4.format(value);
+
     }
 }
