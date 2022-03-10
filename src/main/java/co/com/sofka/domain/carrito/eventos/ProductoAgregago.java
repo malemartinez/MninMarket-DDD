@@ -1,4 +1,4 @@
-package co.com.sofka.domain.carrito;
+package co.com.sofka.domain.carrito.eventos;
 
 import co.com.sofka.domain.carrito.valor.Descripcion;
 import co.com.sofka.domain.carrito.valor.Nombre;
