@@ -32,6 +32,11 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         this.proveedor = proveedor;
     }
 
+    private OrdenPedido(OrdenID entityId){
+        super(entityId);
+        subscribe(new OrdenPedidoChange(this));
+    }
+
     public void agregarProducto(productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio){
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(nombre);
