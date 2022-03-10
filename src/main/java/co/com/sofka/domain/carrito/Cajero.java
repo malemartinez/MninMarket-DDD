@@ -2,14 +2,15 @@ package co.com.sofka.domain.carrito;
 
 import co.com.sofka.domain.carrito.valor.Nombre;
 import co.com.sofka.domain.carrito.valor.Telefono;
-import co.com.sofka.domain.carrito.valor.clienteID;
+import co.com.sofka.domain.carrito.valor.cajeroID;
 import co.com.sofka.domain.generic.Entity;
 
-public class Cliente extends Entity<clienteID> {
+public class Cajero extends Entity<cajeroID> {
+
     private Nombre nombre;
     private Telefono telefono;
 
-    public Cliente(clienteID entityId, Nombre nombre, Telefono telefono) {
+    public Cajero(cajeroID entityId,Nombre nombre,Telefono telefono ) {
         super(entityId);
         this.nombre = nombre;
         this.telefono = telefono;
@@ -30,4 +31,6 @@ public class Cliente extends Entity<clienteID> {
     public Telefono Telefono() {
         return telefono;
     }
+
+
 }

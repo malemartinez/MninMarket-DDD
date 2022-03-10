@@ -1,5 +1,6 @@
-package co.com.sofka.domain.carrito;
+package co.com.sofka.domain.carrito.valor;
 
+import co.com.sofka.domain.carrito.valor.metodoID;
 import co.com.sofka.domain.generic.ValueObject;
 
 public class MetodoPago implements ValueObject<metodoID> {

@@ -1,11 +1,15 @@
 package co.com.sofka.domain.carrito.valor;
 
-import co.com.sofka.domain.carrito.valor.facturaID;
 import co.com.sofka.domain.generic.ValueObject;
 
-public class Factura implements ValueObject<facturaID> {
+public class Telefono implements ValueObject<String> {
+    private final String telefono;
 
 
+
+    public Telefono(String telefono) {
+        this.telefono = telefono;
+    }
 
     @Override
     public int hashCode() {
@@ -18,7 +22,7 @@ public class Factura implements ValueObject<facturaID> {
     }
 
     @Override
-    public facturaID value() {
+    public String value() {
         return null;
     }
 }

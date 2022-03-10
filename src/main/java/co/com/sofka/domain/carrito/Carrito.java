@@ -1,7 +1,8 @@
 package co.com.sofka.domain.carrito;
 
-import co.com.sofka.domain.carrito.valor.Cajero;
+import co.com.sofka.domain.carrito.eventos.CarritoCreado;
 import co.com.sofka.domain.carrito.valor.Factura;
+import co.com.sofka.domain.carrito.valor.MetodoPago;
 import co.com.sofka.domain.carrito.valor.carritoID;
 import co.com.sofka.domain.generic.AggregateEvent;
 
@@ -14,7 +15,15 @@ public class Carrito extends AggregateEvent<carritoID> {
     protected Factura factura;
     protected MetodoPago metodoPago;
 
-    public Carrito(carritoID entityId) {
+    public Carrito(carritoID entityId, Cajero cajero, Cliente cliente) {
         super(entityId);
+        this.cajero = cajero;
+        this.cliente = cliente;
+        appendChange(new CarritoCreado(cajero,cliente)).apply();
+    }
+
+    private Carrito(carritoID entityId) {
+        super(entityId);
+
     }
 }
