@@ -1,6 +1,7 @@
 package co.com.sofka.domain.carrito;
 
 import co.com.sofka.domain.carrito.valor.Cajero;
+import co.com.sofka.domain.carrito.valor.Factura;
 import co.com.sofka.domain.carrito.valor.carritoID;
 import co.com.sofka.domain.generic.AggregateEvent;
 
