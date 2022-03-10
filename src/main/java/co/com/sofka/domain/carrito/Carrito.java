@@ -1,17 +1,16 @@
 package co.com.sofka.domain.carrito;
 
 import co.com.sofka.domain.carrito.eventos.CarritoCreado;
-import co.com.sofka.domain.carrito.valor.Factura;
-import co.com.sofka.domain.carrito.valor.MetodoPago;
-import co.com.sofka.domain.carrito.valor.carritoID;
+import co.com.sofka.domain.carrito.valor.*;
 import co.com.sofka.domain.generic.AggregateEvent;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Carrito extends AggregateEvent<carritoID> {
     protected Cajero cajero;
     protected Cliente cliente;
-    protected List<Productos> productos;
+    protected List<Producto> productos;
     protected Factura factura;
     protected MetodoPago metodoPago;
 
@@ -25,5 +24,19 @@ public class Carrito extends AggregateEvent<carritoID> {
     private Carrito(carritoID entityId) {
         super(entityId);
 
+    }
+
+    public void agregarProducto(productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio){
+        Objects.requireNonNull(entityId);
+        Objects.requireNonNull(nombre);
+        Objects.requireNonNull(descripcion);
+        Objects.requireNonNull(precio);
+        appendChange(new ProductoAgregago(entityId, nombre, descripcion, precio)).apply();
+
+    }
+
+    public void eliminarProducto(productoID entityId){
+        Objects.requireNonNull(entityId);
+        appendChange(new ProductoEliminado(entityId)).apply();
     }
 }
