@@ -6,15 +6,20 @@ import co.com.sofka.domain.generic.DomainEvent;
 
 public class PrecioProductoActualizado extends DomainEvent {
 
-    private ProductoId productoId;
-    private Precio precio;
+    private final ProductoId productoId;
+    private final Precio precio;
 
     public PrecioProductoActualizado(ProductoId productoId, Precio precio) {
-        super("PrecioProductoActulizado");
+        super("sofka.estanteria.PrecioProductoActulizado");
         this.productoId = productoId;
         this.precio = precio;
     }
 
+    public ProductoId getProductoId() {
+        return productoId;
+    }
 
-
+    public Precio getPrecio() {
+        return precio;
+    }
 }
