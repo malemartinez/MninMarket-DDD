@@ -72,4 +72,24 @@ public class Carrito extends AggregateEvent<carritoID> {
         Objects.requireNonNull(cliente);
         appendChange(new TelefonoCajeroActualizado(cliente)).apply();
     }
+
+    public Cajero Cajero() {
+        return cajero;
+    }
+
+    public Cliente Cliente() {
+        return cliente;
+    }
+
+    public List<Producto> Productos() {
+        return productos;
+    }
+
+    public Factura Factura() {
+        return factura;
+    }
+
+    public MetodoPago MetodoPago() {
+        return metodoPago;
+    }
 }

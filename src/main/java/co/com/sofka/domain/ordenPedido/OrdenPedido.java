@@ -8,10 +8,13 @@ import co.com.sofka.domain.generic.AggregateEvent;
 
 import co.com.sofka.domain.ordenPedido.eventos.*;
 import co.com.sofka.domain.ordenPedido.valor.Fecha;
+import co.com.sofka.domain.ordenPedido.valor.OrdenID;
+import co.com.sofka.domain.ordenPedido.valor.ProductoId;
 
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class OrdenPedido extends AggregateEvent<OrdenID> {
@@ -68,15 +71,28 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         appendChange(new DireccionMinimarketActualizado(miniMarket)).apply();
     }
 
-    public void actualizarPrecioProducto(Producto producto , Precio nuevoPrecio){
-        var productofiltrado = productos.stream()
-                .filter( item -> item.getProductoId()
-                        .equals(producto.identity())).findFirst();
-
-
-        appendChange(new PrecioProductoActualizado(productofiltrado.get() , nuevoPrecio)).apply();
+    public void actualizarPrecioProducto(ProductoId productoId , Precio nuevoPrecio){
+       appendChange(new PrecioProductoActualizado(productoId , nuevoPrecio)).apply();
     }
 
+    public Optional<Producto> getProductoporID(ProductoId productoId){
+        return productos.stream()
+                .filter( item -> item.getProductoId().equals(productoId)).findFirst();
+    }
 
+    public Fecha Fecha() {
+        return fecha;
+    }
 
+    public MiniMarket MiniMarket() {
+        return miniMarket;
+    }
+
+    public List<Producto> Productos() {
+        return productos;
+    }
+
+    public Proveedor Proveedor() {
+        return proveedor;
+    }
 }
