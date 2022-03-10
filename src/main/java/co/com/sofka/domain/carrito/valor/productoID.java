@@ -1,6 +1,5 @@
-package co.com.sofka.domain.carrito;
+package co.com.sofka.domain.carrito.valor;
 
-import co.com.sofka.domain.carrito.valor.cajeroID;
 import co.com.sofka.domain.generic.Identity;
 
 public class productoID extends Identity {
