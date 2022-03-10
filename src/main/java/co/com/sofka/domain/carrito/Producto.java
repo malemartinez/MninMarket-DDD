@@ -5,8 +5,13 @@ import co.com.sofka.domain.carrito.valor.Nombre;
 import co.com.sofka.domain.carrito.valor.Precio;
 import co.com.sofka.domain.carrito.valor.productoID;
 import co.com.sofka.domain.generic.Entity;
+import co.com.sofka.domain.ordenPedido.valor.ProductoId;
+
+import java.util.Objects;
 
 public class Producto extends Entity<productoID> {
+
+        private ProductoId productoId;
         private Nombre nombre;
         private Descripcion descripcion;
         private Precio precio;
@@ -18,18 +23,18 @@ public class Producto extends Entity<productoID> {
                 this.precio = precio;
         }
 
-        public void cambiarNombre(Nombre nuevoNombre){
-                this.nombre = nuevoNombre;
+        public void actualizarNombre(Nombre nuevoNombre){
+                this.nombre = Objects.requireNonNull(nuevoNombre);
         }
 
-        public void cambiarDescripcion(Descripcion descripcion){
-                this.descripcion = descripcion;
+        public void actualizarPrecio(Precio nuevoPrecio){
+                this.precio = Objects.requireNonNull(nuevoPrecio);
         }
 
-        public void cambiarPrecio(Precio nuevoPrecio){
-
-                this.precio = nuevoPrecio;
+        public void actualizarDescripcion(Descripcion nuevaDescripcion){
+                this.descripcion = Objects.requireNonNull(nuevaDescripcion);
         }
+
 
         public Nombre getNombre() {
                 return nombre;
@@ -41,5 +46,9 @@ public class Producto extends Entity<productoID> {
 
         public Precio getPrecio() {
                 return precio;
+        }
+
+        public ProductoId getProductoId() {
+                return productoId;
         }
 }
