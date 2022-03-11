@@ -12,8 +12,8 @@ public class AgregarProductoCarrito extends UseCase<RequestCommand<agregarProduc
     public void executeUseCase(RequestCommand<agregarProducto> input) {
         var command = input.getCommand();
 
-        var carrito = Carrito.from(command.getID(),retrieveEvents());
-        Producto producto = new Producto(command.getEntityId(),command.getNombre(),command.getDescripcion(),command.getPrecio());
-        emit().onResponse(new ResponseEvents(carrito.getUncommittedChanges()));
+        //var carrito = Carrito.from(command.getID(),retrieveEvents());
+        //Producto producto = new Producto(command.getEntityId(),command.getNombre(),command.getDescripcion(),command.getPrecio());
+        //emit().onResponse(new ResponseEvents(carrito.getUncommittedChanges()));
     }
 }

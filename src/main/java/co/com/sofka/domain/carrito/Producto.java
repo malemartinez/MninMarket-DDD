@@ -3,31 +3,30 @@ package co.com.sofka.domain.carrito;
 import co.com.sofka.domain.carrito.valor.Descripcion;
 import co.com.sofka.domain.carrito.valor.Nombre;
 import co.com.sofka.domain.carrito.valor.Precio;
-import co.com.sofka.domain.carrito.valor.productoID;
+import co.com.sofka.domain.carrito.valor.ProductoID;
 import co.com.sofka.domain.generic.Entity;
-import co.com.sofka.domain.ordenPedido.valor.ProductoId;
 
 import java.util.Objects;
 
-public class Producto extends Entity<productoID> {
+public class Producto extends Entity<ProductoID> {
 
 
         private Nombre nombre;
         private Descripcion descripcion;
         private Precio precio;
 
-        protected Producto(productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio) {
+        protected Producto(ProductoID entityId, Nombre nombre, Descripcion descripcion, Precio precio) {
                 super(entityId);
                 this.nombre = nombre;
                 this.descripcion = descripcion;
                 this.precio = precio;
         }
 
-        private Producto(productoID entityId){
+        private Producto(ProductoID entityId){
                 super(entityId);
         }
 
-        public static Producto from(productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio){
+        public static Producto from(ProductoID entityId, Nombre nombre, Descripcion descripcion, Precio precio){
                 var nuevoProducto = new Producto(entityId);
                 nuevoProducto.nombre = nombre;
                 nuevoProducto.precio = precio;

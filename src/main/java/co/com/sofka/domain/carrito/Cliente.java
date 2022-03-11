@@ -1,25 +1,25 @@
 package co.com.sofka.domain.carrito;
 
+import co.com.sofka.domain.carrito.valor.ClienteID;
 import co.com.sofka.domain.carrito.valor.Nombre;
 import co.com.sofka.domain.carrito.valor.Telefono;
-import co.com.sofka.domain.carrito.valor.clienteID;
 import co.com.sofka.domain.generic.Entity;
 
-public class Cliente extends Entity<clienteID> {
+public class Cliente extends Entity<ClienteID> {
     private Nombre nombre;
     private Telefono telefono;
 
-    protected Cliente(clienteID entityId, Nombre nombre, Telefono telefono) {
+    protected Cliente(ClienteID entityId, Nombre nombre, Telefono telefono) {
         super(entityId);
         this.nombre = nombre;
         this.telefono = telefono;
     }
 
-    private Cliente (clienteID entityId){
+    private Cliente (ClienteID entityId){
         super(entityId);
     }
 
-    public static Cliente from(clienteID entityId, Nombre nombre, Telefono telefono){
+    public static Cliente from(ClienteID entityId, Nombre nombre, Telefono telefono){
         var nuevoCliente = new Cliente(entityId);
         nuevoCliente.nombre = nombre;
         nuevoCliente.telefono = telefono;

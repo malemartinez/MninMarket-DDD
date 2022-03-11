@@ -1,17 +1,26 @@
 package co.com.sofka.domain.carrito.eventos;
 
 import co.com.sofka.domain.carrito.Cliente;
+import co.com.sofka.domain.carrito.valor.ClienteID;
+import co.com.sofka.domain.carrito.valor.Nombre;
+import co.com.sofka.domain.carrito.valor.Telefono;
 import co.com.sofka.domain.generic.DomainEvent;
 
 public class TelefonoClienteActualizado extends DomainEvent {
-    private final Cliente cliente;
+    private final ClienteID clienteID;
+    private  final Telefono telefono;
 
-    public TelefonoClienteActualizado(Cliente cliente) {
+    public TelefonoClienteActualizado(ClienteID clienteID, Telefono telefono) {
         super("TelefonoClienteActualizado");
-        this.cliente = cliente;
+        this.clienteID = clienteID;
+        this.telefono = telefono;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public ClienteID getClienteID() {
+        return clienteID;
+    }
+
+    public Telefono getTelefono() {
+        return telefono;
     }
 }

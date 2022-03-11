@@ -1,7 +1,6 @@
 package co.com.sofka.domain.carrito.comandos;
 
 import co.com.sofka.domain.carrito.Producto;
-import co.com.sofka.domain.carrito.valor.carritoID;
 import co.com.sofka.domain.generic.Command;
 
 public class eliminarProducto extends Command {
