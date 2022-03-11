@@ -1,5 +1,6 @@
 package co.com.sofka.domain.estanteria;
 
+
 import co.com.sofka.domain.estanteria.eventos.*;
 import co.com.sofka.domain.generic.EventChange;
 
@@ -23,13 +24,14 @@ public class EstanteriaChange extends EventChange {
             productoFiltado.actualizarPrecio(event.getPrecio());
         });
 
-        apply((ProductoAgregago event) -> {
-
+        apply((ProductoAgregago event)-> {
+            estanteria.agregarProducto(event.getEntityId(),event.getNombre(),event.getDescripcion(),event.getPrecio());
         });
 
-        apply((ProductoEliminado event) -> {
-
-        });
+        apply((ProductoEliminado event)->{
+            var producto = estanteria.getProductoporId(event.getEntityId()).orElseThrow();
+            estanteria.eliminarProducto(producto.identity());
+        } );
 
         apply((TelefonoSurtidorActualizado event) ->{
             estanteria.surtidor = event.getSurtidor();
