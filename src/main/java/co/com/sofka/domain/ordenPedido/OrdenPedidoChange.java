@@ -35,7 +35,8 @@ public class OrdenPedidoChange extends EventChange {
         });
 
         apply((PrecioProductoActualizado event) ->{
-            var productoFiltado = ordenPedido.getProductoporID(event.getProductoId()).orElseThrow();
+            var productoFiltado = ordenPedido.getProductoporID(event.getProductoId()).orElseThrow(
+                    ()-> new IllegalArgumentException("Producto no encontrado"));
             productoFiltado.actualizarPrecio(event.getPrecio());
         });
 
