@@ -6,7 +6,7 @@ public class Precio implements ValueObject<Double> {
 
     private Double precio;
 
-    public Precio(Double price) {
+    public Precio(Double precio) {
         this.precio = precio;
     }
 

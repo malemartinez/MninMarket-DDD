@@ -22,9 +22,9 @@ public class Estanteria extends AggregateEvent<EstanteriaId> {
         this.surtidor = surtidor;
     }
 
-    public void actualizarNombreSurtidor(Cliente cliente){
-        Objects.requireNonNull(cliente);
-        appendChange(new NombreSurtidorActualizado(cliente)).apply();
+    public void actualizarNombreSurtidor(Surtidor surtidor){
+        Objects.requireNonNull(surtidor);
+        appendChange(new NombreSurtidorActualizado(surtidor)).apply();
     }
 
     public void actualizarTelefonoSurtidor(Surtidor surtidor){

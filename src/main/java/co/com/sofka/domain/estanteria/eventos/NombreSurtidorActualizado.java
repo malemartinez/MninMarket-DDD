@@ -1,18 +1,18 @@
 package co.com.sofka.domain.estanteria.eventos;
 
-import co.com.sofka.domain.carrito.Cliente;
+import co.com.sofka.domain.estanteria.Surtidor;
 import co.com.sofka.domain.generic.DomainEvent;
 
 public class NombreSurtidorActualizado extends DomainEvent {
 
-    private final Cliente cliente;
+    private final Surtidor surtidor;
 
-    public NombreSurtidorActualizado(Cliente cliente) {
+    public NombreSurtidorActualizado(Surtidor surtidor) {
         super("sofka.estanteria.NombreSurtidorActualizado");
-        this.cliente = cliente;
+        this.surtidor = surtidor;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Surtidor getSurtidor() {
+        return surtidor;
     }
 }

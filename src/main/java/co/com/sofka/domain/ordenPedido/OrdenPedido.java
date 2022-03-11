@@ -1,15 +1,9 @@
 package co.com.sofka.domain.ordenPedido;
-import co.com.sofka.domain.carrito.eventos.*;
-import co.com.sofka.domain.carrito.valor.Descripcion;
-import co.com.sofka.domain.carrito.valor.Nombre;
-import co.com.sofka.domain.carrito.valor.Precio;
-import co.com.sofka.domain.carrito.valor.productoID;
+
 import co.com.sofka.domain.generic.AggregateEvent;
 
 import co.com.sofka.domain.ordenPedido.eventos.*;
-import co.com.sofka.domain.ordenPedido.valor.Fecha;
-import co.com.sofka.domain.ordenPedido.valor.OrdenID;
-import co.com.sofka.domain.ordenPedido.valor.ProductoId;
+import co.com.sofka.domain.ordenPedido.valor.*;
 
 
 import java.util.List;
@@ -37,16 +31,16 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         subscribe(new OrdenPedidoChange(this));
     }
 
-    public void agregarProducto(productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio){
+    public void agregarProducto(ProductoId entityId, Nombre nombre, Descripcion descripcion, Precio precio){
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(descripcion);
         Objects.requireNonNull(precio);
-        appendChange(new ProductoAgregago(entityId, nombre, descripcion, precio)).apply();
+        appendChange(new ProductoAgregado(entityId, nombre, descripcion, precio)).apply();
 
     }
 
-    public void eliminarProducto(productoID entityId){
+    public void eliminarProducto(ProductoId entityId){
         Objects.requireNonNull(entityId);
         appendChange(new ProductoEliminado(entityId)).apply();
     }
@@ -76,8 +70,8 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         appendChange(new DireccionMinimarketActualizado(miniMarket)).apply();
     }
 
-    public void actualizarPrecioProducto(ProductoId productoId , Precio nuevoPrecio){
-       appendChange(new PrecioProductoActualizado(productoId , nuevoPrecio)).apply();
+    public void actualizarPrecioProducto(ProductoId productoId , Precio precio){
+       appendChange(new PrecioProductoActualizado(productoId , precio)).apply();
     }
 
     public Optional<Producto> getProductoporID(ProductoId productoId){
