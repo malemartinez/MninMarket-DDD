@@ -3,6 +3,7 @@ package co.com.sofka.domain.carrito;
 import co.com.sofka.domain.carrito.eventos.*;
 import co.com.sofka.domain.carrito.valor.*;
 import co.com.sofka.domain.carrito.valor.productoID;
+import co.com.sofka.domain.carrito.eventos.ClienteCreado;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 
@@ -11,18 +12,16 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class Carrito extends AggregateEvent<carritoID> {
+
     protected Cajero cajero;
     protected Cliente cliente;
     protected List<Producto> productos;
     protected Factura factura;
     protected MetodoPago metodoPago;
 
-    public Carrito(carritoID entityId, Cajero cajero, Cliente cliente,List<Producto> productos) {
+    public Carrito(carritoID entityId,List<Producto> productos ) {
         super(entityId);
-        this.cajero = cajero;
-        this.cliente = cliente;
-        this.productos = productos;
-        appendChange(new CarritoCreado(cajero,cliente)).apply();
+        appendChange(new CarritoCreado(entityId)).apply();
     }
 
     private Carrito(carritoID entityId) {
@@ -34,6 +33,11 @@ public class Carrito extends AggregateEvent<carritoID> {
         var carrito = new Carrito(entityId);
         events.forEach(carrito::applyEvent);
         return carrito;
+    }
+
+    //Crear cliente
+    public void crearCliente(clienteID id, Nombre nombre, Telefono telefono){
+        appendChange(new ClienteCreado(id, nombre,telefono )).apply();
     }
 
 
@@ -48,9 +52,9 @@ public class Carrito extends AggregateEvent<carritoID> {
 
     }
 
-    public void eliminarProducto(Producto producto){
-        Objects.requireNonNull(producto);
-        appendChange(new ProductoEliminado(producto.identity())).apply();
+    public void eliminarProducto(productoID entityId){
+        Objects.requireNonNull(entityId);
+        appendChange(new ProductoEliminado(entityId)).apply();
     }
 
     public void vaciarCarrito(){
@@ -65,10 +69,10 @@ public class Carrito extends AggregateEvent<carritoID> {
         appendChange(new FacturaGenerada(cajero,cliente,productos,metodoPago)).apply();
     }
 
-    public void actualizarNombreCliente(Cliente cliente){
-        Objects.requireNonNull(cliente);
-        appendChange(new NombreClienteActualizado(cliente)).apply();
-    }
+    //public void actualizarNombreCliente(clienteID id){
+    //    Objects.requireNonNull(id);
+    //    appendChange(new NombreClienteActualizado(id)).apply();
+    //}
 
     public void actualizarTelefonoCliente(Cliente cliente){
         Objects.requireNonNull(cliente);
@@ -85,7 +89,7 @@ public class Carrito extends AggregateEvent<carritoID> {
         appendChange(new TelefonoCajeroActualizado(cajero)).apply();
     }
 
-    protected Optional<Producto> getProductoPorID(productoID productoId){
+    public Optional<Producto> getProductoPorID(productoID productoId){
         return productos.stream()
                 .filter( item -> item.identity().equals(productoId)).findFirst();
     }

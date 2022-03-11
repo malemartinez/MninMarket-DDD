@@ -12,7 +12,7 @@ public class NombreClienteActualizado extends DomainEvent {
         this.cliente = cliente;
     }
 
-    public Cliente getCajero() {
+    public Cliente getCliente() {
         return cliente;
     }
 }

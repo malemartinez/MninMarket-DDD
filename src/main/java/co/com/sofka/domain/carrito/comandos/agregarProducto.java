@@ -11,6 +11,10 @@ public class agregarProducto extends Command {
     private final Descripcion descripcion;
     private final Precio precio;
 
+    public carritoID getID() {
+        return ID;
+    }
+
     public agregarProducto(carritoID ID, productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio) {
         this.ID = ID;
         this.entityId = entityId;

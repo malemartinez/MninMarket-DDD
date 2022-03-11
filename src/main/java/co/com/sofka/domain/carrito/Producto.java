@@ -16,11 +16,23 @@ public class Producto extends Entity<productoID> {
         private Descripcion descripcion;
         private Precio precio;
 
-        public Producto(productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio) {
+        protected Producto(productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio) {
                 super(entityId);
                 this.nombre = nombre;
                 this.descripcion = descripcion;
                 this.precio = precio;
+        }
+
+        private Producto(productoID entityId){
+                super(entityId);
+        }
+
+        public static Producto from(productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio){
+                var nuevoProducto = new Producto(entityId);
+                nuevoProducto.nombre = nombre;
+                nuevoProducto.precio = precio;
+                nuevoProducto.descripcion=descripcion;
+                return nuevoProducto;
         }
 
         public void actualizarNombre(Nombre nuevoNombre){

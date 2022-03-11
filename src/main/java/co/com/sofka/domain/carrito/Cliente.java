@@ -9,10 +9,22 @@ public class Cliente extends Entity<clienteID> {
     private Nombre nombre;
     private Telefono telefono;
 
-    public Cliente(clienteID entityId, Nombre nombre, Telefono telefono) {
+    protected Cliente(clienteID entityId, Nombre nombre, Telefono telefono) {
         super(entityId);
         this.nombre = nombre;
         this.telefono = telefono;
+    }
+
+    private Cliente (clienteID entityId){
+        super(entityId);
+    }
+
+    public static Cliente from(clienteID entityId, Nombre nombre, Telefono telefono){
+        var nuevoCliente = new Cliente(entityId);
+        nuevoCliente.nombre = nombre;
+        nuevoCliente.telefono = telefono;
+        return nuevoCliente;
+
     }
 
     public void actualizarNombre(Nombre nuevoNombre){
@@ -30,4 +42,6 @@ public class Cliente extends Entity<clienteID> {
     public Telefono Telefono() {
         return telefono;
     }
+
+
 }

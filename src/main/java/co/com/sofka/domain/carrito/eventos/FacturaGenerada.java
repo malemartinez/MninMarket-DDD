@@ -24,19 +24,4 @@ public class FacturaGenerada extends DomainEvent {
         this.metodoPago = metodoPago;
     }
 
-    public Cajero getCajero() {
-        return cajero;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public MetodoPago getMetodoPago() {
-        return metodoPago;
-    }
 }
