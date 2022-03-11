@@ -1,10 +1,11 @@
 package co.com.sofka.domain.estanteria;
 
+import co.com.sofka.domain.estanteria.valor.Descripcion;
+import co.com.sofka.domain.estanteria.valor.Nombre;
+import co.com.sofka.domain.estanteria.valor.Precio;
+import co.com.sofka.domain.estanteria.valor.ProductoId;
 import co.com.sofka.domain.generic.Entity;
-import co.com.sofka.domain.ordenPedido.valor.Descripcion;
-import co.com.sofka.domain.ordenPedido.valor.Nombre;
-import co.com.sofka.domain.ordenPedido.valor.Precio;
-import co.com.sofka.domain.ordenPedido.valor.ProductoId;
+
 
 import java.util.Objects;
 
