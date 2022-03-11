@@ -31,15 +31,15 @@ public class Proveedor extends Entity<ProveedorId> {
     }
 
 
-    public void setProveedorId(ProveedorId proveedorId) {
-        this.proveedorId = proveedorId;
+    public ProveedorId getProveedorId() {
+        return proveedorId;
     }
 
-    public void setNombre(Nombre nombre) {
-        this.nombre = nombre;
+    public Nombre getNombre() {
+        return nombre;
     }
 
-    public void setTelefono(Telefono telefono) {
-        this.telefono = telefono;
+    public Telefono getTelefono() {
+        return telefono;
     }
 }

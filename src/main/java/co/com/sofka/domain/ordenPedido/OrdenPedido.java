@@ -36,12 +36,15 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(descripcion);
         Objects.requireNonNull(precio);
+        var NuevoProducto = new Producto(entityId,precio,nombre,descripcion);
+        productos.add(NuevoProducto);
         appendChange(new ProductoAgregado(entityId, nombre, descripcion, precio)).apply();
 
     }
 
     public void eliminarProducto(ProductoId entityId){
         Objects.requireNonNull(entityId);
+        productos.remove(this.getProductoporID(entityId).get());
         appendChange(new ProductoEliminado(entityId)).apply();
     }
 
@@ -76,7 +79,7 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
 
     public Optional<Producto> getProductoporID(ProductoId productoId){
         return productos.stream()
-                .filter( item -> item.getProductoId().equals(productoId)).findFirst();
+                .filter( item -> item.identity().equals(productoId)).findFirst();
     }
 
     public Fecha Fecha() {

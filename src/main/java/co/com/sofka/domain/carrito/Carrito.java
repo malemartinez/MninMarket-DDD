@@ -30,6 +30,8 @@ public class Carrito extends AggregateEvent<carritoID> {
 
     }
 
+
+
     public void agregarProducto(productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio){
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(nombre);

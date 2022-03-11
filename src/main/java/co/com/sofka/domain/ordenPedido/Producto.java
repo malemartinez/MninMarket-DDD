@@ -32,9 +32,9 @@ public class Producto extends Entity<ProductoId> {
         this.descripcion = Objects.requireNonNull(nuevaDescripcion);
     }
 
-    public ProductoId getProductoId() {
+    /*public ProductoId getProductoId() {
         return productoId;
-    }
+    }*/
 
     public Precio getPrecio() {
         return precio;

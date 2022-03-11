@@ -28,7 +28,8 @@ public class CarritoChange extends EventChange {
         });
 
         apply((ProductoEliminado event)->{
-            var producto = carrito.getProductoPorID(event.getEntityId()).orElseThrow();
+            var producto = carrito.getProductoPorID(event.getEntityId())
+                    .orElseThrow(()-> new IllegalArgumentException("No se encuentra el producto"));
             carrito.eliminarProducto(producto);
         } );
 
