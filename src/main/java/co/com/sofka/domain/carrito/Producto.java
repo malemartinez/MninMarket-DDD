@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Producto extends Entity<productoID> {
 
-        private ProductoId productoId;
+
         private Nombre nombre;
         private Descripcion descripcion;
         private Precio precio;
@@ -48,7 +48,5 @@ public class Producto extends Entity<productoID> {
                 return precio;
         }
 
-        public ProductoId getProductoId() {
-                return productoId;
-        }
+
 }
