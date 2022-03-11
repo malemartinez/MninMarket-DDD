@@ -14,13 +14,22 @@ public class Proveedor extends Entity<ProveedorId> {
     private Nombre nombre;
     private Telefono telefono;
 
-    public Proveedor(ProveedorId entityId, ProveedorId proveedorId, Nombre nombre, Telefono telefono) {
-        super(entityId);
-        this.proveedorId = proveedorId;
+    protected Proveedor(ProveedorId proveedorId, Nombre nombre, Telefono telefono) {
+        super(proveedorId);
         this.nombre = nombre;
         this.telefono = telefono;
     }
 
+    private Proveedor(ProveedorId proveedorId){
+        super(proveedorId);
+    }
+
+    public static Proveedor from(ProveedorId proveedorId, Nombre nombre, Telefono telefono){
+        Proveedor nuevoProveedor = new Proveedor(proveedorId);
+        nuevoProveedor.nombre = nombre;
+        nuevoProveedor.telefono = telefono;
+        return nuevoProveedor;
+    }
 
     public void actualizarNombre(Nombre nuevoNombre){
         this.nombre = Objects.requireNonNull(nuevoNombre);
@@ -31,15 +40,15 @@ public class Proveedor extends Entity<ProveedorId> {
     }
 
 
-    public ProveedorId getProveedorId() {
+    public ProveedorId ProveedorId() {
         return proveedorId;
     }
 
-    public Nombre getNombre() {
+    public Nombre Nombre() {
         return nombre;
     }
 
-    public Telefono getTelefono() {
+    public Telefono Telefono() {
         return telefono;
     }
 }
