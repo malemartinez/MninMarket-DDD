@@ -7,6 +7,7 @@ import co.com.sofka.domain.carrito.eventos.ClienteCreado;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -18,15 +19,17 @@ public class Carrito extends AggregateEvent<CarritoID> {
     protected List<Producto> productos;
     protected Factura factura;
     protected MetodoPago metodoPago;
+    protected Total total;
 
-    public Carrito(CarritoID entityId,List<Producto> productos ) {
-        super(entityId);
-        appendChange(new CarritoCreado(entityId)).apply();
-    }
+    //public Carrito(CarritoID entityId,List<Producto> productos ) {
+    //   super(entityId);
+    //   appendChange(new CarritoCreado(entityId)).apply();
+    //
 
     private Carrito(CarritoID entityId) {
         super(entityId);
         subscribe(new CarritoChange(this));
+        appendChange(new CarritoCreado(entityId)).apply();
 
     }
     public static Carrito from(CarritoID entityId, List<DomainEvent> events) {
@@ -72,6 +75,18 @@ public class Carrito extends AggregateEvent<CarritoID> {
         appendChange(new FacturaGenerada(clienteID,cajeroID,pago,metodoPago)).apply();
     }
 
+    public void calcularTotal(Total total){
+        appendChange(new TotalCalculado(total)).apply();
+    }
+
+    protected Double getProductPrice(){
+        Double suma = 0.0;
+        for ( Producto producto: productos) {
+              suma +=  producto.getPrecio().value();
+        }
+        return suma;
+    }
+
     public void actualizarNombreCliente(ClienteID id, Nombre nombre){
         Objects.requireNonNull(nombre);
         appendChange(new NombreClienteActualizado(id, nombre)).apply();
@@ -96,6 +111,8 @@ public class Carrito extends AggregateEvent<CarritoID> {
         return productos.stream()
                 .filter( item -> item.identity().equals(productoId)).findFirst();
     }
+
+
 
     public Cajero Cajero() {
         return cajero;
