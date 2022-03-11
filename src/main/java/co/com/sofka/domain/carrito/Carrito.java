@@ -5,8 +5,6 @@ import co.com.sofka.domain.carrito.valor.*;
 import co.com.sofka.domain.carrito.valor.productoID;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofka.domain.ordenPedido.OrdenPedido;
-import co.com.sofka.domain.ordenPedido.valor.OrdenID;
 
 import java.util.List;
 import java.util.Objects;
@@ -52,13 +50,11 @@ public class Carrito extends AggregateEvent<carritoID> {
 
     public void eliminarProducto(Producto producto){
         Objects.requireNonNull(producto);
-
         appendChange(new ProductoEliminado(producto.identity())).apply();
     }
 
-    public void vaciarCarrito(List<Producto> productos){
-        Objects.requireNonNull(productos);
-        appendChange(new CarritoVaciado(productos)).apply();
+    public void vaciarCarrito(){
+        appendChange(new CarritoVaciado()).apply();
     }
 
     public void generarFactura(Cajero cajero, Cliente cliente, List<Producto> productos, MetodoPago metodoPago){
@@ -89,7 +85,7 @@ public class Carrito extends AggregateEvent<carritoID> {
         appendChange(new TelefonoCajeroActualizado(cajero)).apply();
     }
 
-    public Optional<Producto> getProductoPorID(productoID productoId){
+    protected Optional<Producto> getProductoPorID(productoID productoId){
         return productos.stream()
                 .filter( item -> item.identity().equals(productoId)).findFirst();
     }
