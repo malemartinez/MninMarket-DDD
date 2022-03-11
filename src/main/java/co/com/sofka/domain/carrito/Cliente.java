@@ -15,11 +15,11 @@ public class Cliente extends Entity<clienteID> {
         this.telefono = telefono;
     }
 
-    public void cambiarNombre(Nombre nuevoNombre){
+    public void actualizarNombre(Nombre nuevoNombre){
         this.nombre = nuevoNombre;
     }
 
-    public void cambiarTelefono(Telefono nuevoTelefono){
+    public void actualizarTelefono(Telefono nuevoTelefono){
         this.telefono = nuevoTelefono;
     }
 

@@ -13,14 +13,14 @@ public class Factura implements ValueObject<facturaID> {
     private final Cliente cliente;
     private final List<Producto> productos;
     private final MetodoPago metodoPago;
-    private final facturaID id;
 
-    public Factura(Cajero cajero, Cliente cliente, List<Producto> productos, MetodoPago metodoPago, facturaID id) {
+
+    public Factura(Cajero cajero, Cliente cliente, List<Producto> productos, MetodoPago metodoPago) {
         this.cajero = cajero;
         this.cliente = cliente;
         this.productos = productos;
         this.metodoPago = metodoPago;
-        this.id = id;
+
     }
 
     @Override
@@ -35,6 +35,7 @@ public class Factura implements ValueObject<facturaID> {
 
     @Override
     public facturaID value() {
+
         return null;
     }
 }

@@ -35,6 +35,8 @@ public class Carrito extends AggregateEvent<carritoID> {
         Objects.requireNonNull(nombre);
         Objects.requireNonNull(descripcion);
         Objects.requireNonNull(precio);
+        var NuevoProducto = new Producto(entityId, nombre, descripcion, precio);
+        productos.add(NuevoProducto);
         appendChange(new ProductoAgregago(entityId, nombre, descripcion, precio)).apply();
 
     }
@@ -57,6 +59,7 @@ public class Carrito extends AggregateEvent<carritoID> {
         Objects.requireNonNull(cliente);
         Objects.requireNonNull(productos);
         Objects.requireNonNull(metodoPago);
+        this.factura = new Factura(cajero,cliente,productos,metodoPago);
         appendChange(new FacturaGenerada(cajero,cliente,productos,metodoPago)).apply();
     }
 
@@ -82,7 +85,7 @@ public class Carrito extends AggregateEvent<carritoID> {
 
     public Optional<Producto> getProductoPorID(productoID productoId){
         return productos.stream()
-                .filter( item -> item.getProductoId().equals(productoId)).findFirst();
+                .filter( item -> item.identity().equals(productoId)).findFirst();
     }
 
     public Cajero Cajero() {
