@@ -23,7 +23,8 @@ public class EstanteriaChange extends EventChange {
         });
 
         apply((PrecioProductoActualizado event)->{
-            var productoFiltado = estanteria.getProductoporId(event.getProductoId()).orElseThrow();
+            var productoFiltado = estanteria.getProductoporId(event.getProductoId()).orElseThrow(
+                    ()-> new IllegalArgumentException("Producto no encontrado"));
             productoFiltado.actualizarPrecio(event.getPrecio());
         });
 
@@ -40,7 +41,8 @@ public class EstanteriaChange extends EventChange {
         });
 
         apply((ProductoEliminado event)->{
-            var producto = estanteria.getProductoporId(event.getEntityId()).orElseThrow();
+            var producto = estanteria.getProductoporId(event.getEntityId()).orElseThrow(
+                    ()-> new IllegalArgumentException("Producto no encontrado"));
             estanteria.productos.remove(producto);
         } );
 
