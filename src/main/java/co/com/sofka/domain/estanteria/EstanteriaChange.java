@@ -16,25 +16,37 @@ public class EstanteriaChange extends EventChange {
         });
 
         apply((NombreSurtidorActualizado event) ->{
-            estanteria.surtidor = event.getSurtidor();
+            var surtidor = estanteria.surtidor;
+            surtidor.actualizarNombre(event.getSurtidor().getNombre());
+            estanteria.surtidor = surtidor;
+
         });
 
-        apply((PrecioProductoActualizado event) -> {
+        apply((PrecioProductoActualizado event)->{
             var productoFiltado = estanteria.getProductoporId(event.getProductoId()).orElseThrow();
             productoFiltado.actualizarPrecio(event.getPrecio());
         });
 
+        apply((PrecioProductoActualizado event) -> {
+            var productoFiltado = estanteria.getProductoporId(event.getProductoId())
+                    .orElseThrow(()-> new IllegalArgumentException("Producto no encontrado"));
+            productoFiltado.actualizarPrecio(event.getPrecio());
+        });
+
         apply((ProductoAgregago event)-> {
-            estanteria.agregarProducto(event.getEntityId(),event.getNombre(),event.getDescripcion(),event.getPrecio());
+            var NuevoProducto = new Producto(event.getEntityId(),event.getPrecio(),event.getNombre(),event.getDescripcion());
+            estanteria.productos.add(NuevoProducto);
+
         });
 
         apply((ProductoEliminado event)->{
             var producto = estanteria.getProductoporId(event.getEntityId()).orElseThrow();
-            estanteria.eliminarProducto(producto.identity());
+            estanteria.productos.remove(producto);
         } );
 
         apply((TelefonoSurtidorActualizado event) ->{
-            estanteria.surtidor = event.getSurtidor();
+            var surtidor = estanteria.surtidor;
+            surtidor.actualizarTelefono(event.getSurtidor().getTelefono());
         });
     }
 }
