@@ -12,7 +12,7 @@ public class CrearCarritoUseCase extends UseCase<RequestCommand<CrearCarrito>, R
     @Override
     public void executeUseCase(RequestCommand<CrearCarrito> input) {
               var command = input.getCommand();
-              var Carrito = new Carrito(command.getEntityId(),command.getProductos());
+              var Carrito = new Carrito(command.getEntityId(), command.getTotal());
               emit().onResponse(new ResponseEvents(Carrito.getUncommittedChanges()));
     }
 }

@@ -21,15 +21,14 @@ public class Carrito extends AggregateEvent<CarritoID> {
     protected MetodoPago metodoPago;
     protected Total total;
 
-    //public Carrito(CarritoID entityId,List<Producto> productos ) {
-    //   super(entityId);
-    //   appendChange(new CarritoCreado(entityId)).apply();
-    //
+    public Carrito(CarritoID entityId , Total total ) {
+           super(entityId);
+          appendChange(new CarritoCreado(entityId,total)).apply();}
 
     private Carrito(CarritoID entityId) {
         super(entityId);
         subscribe(new CarritoChange(this));
-        appendChange(new CarritoCreado(entityId)).apply();
+
 
     }
     public static Carrito from(CarritoID entityId, List<DomainEvent> events) {

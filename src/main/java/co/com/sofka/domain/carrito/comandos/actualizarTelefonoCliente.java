@@ -1,18 +1,19 @@
 package co.com.sofka.domain.carrito.comandos;
 
 import co.com.sofka.domain.carrito.Cliente;
+import co.com.sofka.domain.carrito.valor.CarritoID;
 import co.com.sofka.domain.generic.Command;
 
 public class actualizarTelefonoCliente extends Command {
-    private final carritoID ID;
+    private final CarritoID ID;
     private final Cliente cliente;
 
-    public actualizarTelefonoCliente(carritoID ID, Cliente cliente) {
+    public actualizarTelefonoCliente(CarritoID ID, Cliente cliente) {
         this.ID = ID;
         this.cliente = cliente;
     }
 
-    public carritoID getID() {
+    public CarritoID getID() {
         return ID;
     }
 
