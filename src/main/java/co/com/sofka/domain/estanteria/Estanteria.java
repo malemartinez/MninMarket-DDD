@@ -61,7 +61,7 @@ public class Estanteria extends AggregateEvent<EstanteriaId> {
         appendChange(new PrecioProductoActualizado(productoId , nuevoPrecio)).apply();
     }
 
-    public Optional<Producto> getProductoporId(ProductoId productoId){
+    protected Optional<Producto> getProductoporId(ProductoId productoId){
         return productos.stream()
                 .filter( item -> item.identity().equals(productoId)).findFirst();
     }
