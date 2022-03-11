@@ -84,7 +84,7 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
        appendChange(new PrecioProductoActualizado(productoId , precio)).apply();
     }
 
-    public Optional<Producto> getProductoporID(ProductoId productoId){
+    protected Optional<Producto> getProductoporID(ProductoId productoId){
         return productos.stream()
                 .filter( item -> item.identity().equals(productoId)).findFirst();
     }
