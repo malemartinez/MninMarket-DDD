@@ -1,5 +1,6 @@
 package co.com.sofka.domain.carrito.eventos;
 
+import co.com.sofka.domain.carrito.Producto;
 import co.com.sofka.domain.carrito.valor.productoID;
 import co.com.sofka.domain.generic.DomainEvent;
 
