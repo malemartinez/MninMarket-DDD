@@ -38,6 +38,8 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         return OrdenPedido;
     }
 
+
+
     public void agregarProducto(ProductoId entityId, Nombre nombre, Descripcion descripcion, Precio precio){
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(nombre);
@@ -46,7 +48,6 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         var NuevoProducto = new Producto(entityId,precio,nombre,descripcion);
         productos.add(NuevoProducto);
         appendChange(new ProductoAgregado(entityId, nombre, descripcion, precio)).apply();
-
     }
 
     public void eliminarProducto(ProductoId entityId){
@@ -55,27 +56,27 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         appendChange(new ProductoEliminado(entityId)).apply();
     }
 
-    public void actualizarNombreProveedor(Proveedor proveedor){
+    public void actualizarNombreProveedor(){
         Objects.requireNonNull(proveedor);
         appendChange(new NombreProveedorActualizado(proveedor)).apply();
     }
 
-    public void actualizarTelefonoProveedor(Proveedor proveedor){
+    public void actualizarTelefonoProveedor(){
         Objects.requireNonNull(proveedor);
         appendChange(new TelefonoProveedorActualizado(proveedor)).apply();
     }
 
-    public void actualizarNombreMinimarket(MiniMarket miniMarket){
+    public void actualizarNombreMinimarket(){
         Objects.requireNonNull(miniMarket);
         appendChange(new NombreMinimarketActualizado(miniMarket)).apply();
     }
 
-    public void actualizarTelefonoMinimarket(MiniMarket miniMarket){
+    public void actualizarTelefonoMinimarket(){
         Objects.requireNonNull(miniMarket);
         appendChange(new TelefonoMinimarketActualizado(miniMarket)).apply();
     }
 
-    public void actualizarDireccionMinimarket(MiniMarket miniMarket){
+    public void actualizarDireccionMinimarket(){
         Objects.requireNonNull(miniMarket);
         appendChange(new DireccionMinimarketActualizado(miniMarket)).apply();
     }

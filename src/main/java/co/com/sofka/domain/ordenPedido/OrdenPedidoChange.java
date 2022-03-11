@@ -18,19 +18,19 @@ public class OrdenPedidoChange extends EventChange {
 
         apply((DireccionMinimarketActualizado event) -> {
             var miniMarket = ordenPedido.miniMarket;
-            miniMarket.actualizarDireccion(event.getMiniMarket().getDireccion());
+            miniMarket.actualizarDireccion(event.getMiniMarket().direccion());
             ordenPedido.miniMarket = miniMarket;
         });
 
         apply((NombreMinimarketActualizado event) -> {
             var miniMarket = ordenPedido.miniMarket;
-            miniMarket.actualizarNombre(event.getMiniMarket().getNombre());
+            miniMarket.actualizarNombre(event.getMiniMarket().nombre());
             ordenPedido.miniMarket = miniMarket;
         });
 
         apply((NombreProveedorActualizado event) -> {
             var proveedor = ordenPedido.proveedor;
-            proveedor.actualizarNombre(event.getProveedor().getNombre());
+            proveedor.actualizarNombre(event.getProveedor().Nombre());
             ordenPedido.proveedor = proveedor;
         });
 
@@ -52,13 +52,13 @@ public class OrdenPedidoChange extends EventChange {
 
         apply((TelefonoMinimarketActualizado event) -> {
             var Minimarket = ordenPedido.miniMarket;
-            Minimarket.actualizarTelefono(event.getMiniMarket().getTelefono());
+            Minimarket.actualizarTelefono(event.getMiniMarket().telefono());
             ordenPedido.miniMarket = Minimarket;
         });
 
         apply((TelefonoProveedorActualizado event) ->{
             var Proveedor = ordenPedido.proveedor;
-            Proveedor.actualizarTelefono(event.getProveedor().getTelefono());
+            Proveedor.actualizarTelefono(event.getProveedor().Telefono());
             ordenPedido.proveedor = Proveedor;
         });
     }

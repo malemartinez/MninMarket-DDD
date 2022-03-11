@@ -59,5 +59,4 @@ public class Producto extends Entity<ProductoID> {
                 return precio;
         }
 
-
 }

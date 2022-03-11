@@ -16,12 +16,23 @@ public class MiniMarket extends Entity<TiendaId> {
     private Telefono telefono;
     private Direccion direccion;
 
-    public MiniMarket(TiendaId entityId, TiendaId tiendaId, Nombre nombre, Telefono telefono, Direccion direccion) {
-        super(entityId);
-        this.tiendaId = tiendaId;
+    protected MiniMarket(TiendaId tiendaId, Nombre nombre, Telefono telefono, Direccion direccion) {
+        super(tiendaId);
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
+    }
+
+    private MiniMarket(TiendaId tiendaId){
+        super(tiendaId);
+    }
+
+    public static MiniMarket from(TiendaId tiendaId, Nombre nombre, Telefono telefono, Direccion direccion){
+        var nuevoMiniMarket = new MiniMarket(tiendaId);
+        nuevoMiniMarket.nombre = nombre;
+        nuevoMiniMarket.telefono = telefono;
+        nuevoMiniMarket.direccion = direccion;
+        return nuevoMiniMarket;
     }
 
     public void actualizarNombre(Nombre nuevoNombre){
@@ -36,15 +47,15 @@ public class MiniMarket extends Entity<TiendaId> {
         this.direccion = Objects.requireNonNull(nuevaDireccion);
     }
 
-    public Nombre getNombre() {
+    public Nombre nombre() {
         return nombre;
     }
 
-    public Telefono getTelefono() {
+    public Telefono telefono() {
         return telefono;
     }
 
-    public Direccion getDireccion() {
+    public Direccion direccion() {
         return direccion;
     }
 }
