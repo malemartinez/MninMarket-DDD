@@ -4,6 +4,9 @@ import co.com.sofka.domain.carrito.eventos.*;
 import co.com.sofka.domain.carrito.valor.*;
 import co.com.sofka.domain.carrito.valor.productoID;
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofka.domain.ordenPedido.OrdenPedido;
+import co.com.sofka.domain.ordenPedido.valor.OrdenID;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,6 +32,11 @@ public class Carrito extends AggregateEvent<carritoID> {
         subscribe(new CarritoChange(this));
 
     }
+    public static Carrito from(carritoID entityId, List<DomainEvent> events) {
+        var carrito = new Carrito(entityId);
+        events.forEach(carrito::applyEvent);
+        return carrito;
+    }
 
 
 
@@ -46,7 +54,6 @@ public class Carrito extends AggregateEvent<carritoID> {
     public void eliminarProducto(Producto producto){
         Objects.requireNonNull(producto);
         productos.remove(producto);
-
         appendChange(new ProductoEliminado(producto.identity())).apply();
     }
 

@@ -2,6 +2,7 @@ package co.com.sofka.domain.ordenPedido;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 
+import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.domain.ordenPedido.eventos.*;
 import co.com.sofka.domain.ordenPedido.valor.*;
 
@@ -29,6 +30,12 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
     private OrdenPedido(OrdenID entityId){
         super(entityId);
         subscribe(new OrdenPedidoChange(this));
+    }
+
+    public static OrdenPedido from(OrdenID entityId, List<DomainEvent> events) {
+        var OrdenPedido = new OrdenPedido(entityId);
+        events.forEach(OrdenPedido::applyEvent);
+        return OrdenPedido;
     }
 
     public void agregarProducto(ProductoId entityId, Nombre nombre, Descripcion descripcion, Precio precio){

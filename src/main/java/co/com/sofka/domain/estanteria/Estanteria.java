@@ -1,10 +1,9 @@
 package co.com.sofka.domain.estanteria;
 
-import co.com.sofka.domain.carrito.Cliente;
-import co.com.sofka.domain.carrito.valor.productoID;
 import co.com.sofka.domain.estanteria.eventos.*;
 import co.com.sofka.domain.estanteria.valor.*;
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.domain.generic.DomainEvent;
 
 
 import java.util.List;
@@ -18,8 +17,20 @@ public class Estanteria extends AggregateEvent<EstanteriaId> {
 
     public Estanteria(EstanteriaId entityId, List<Producto> productos, Surtidor surtidor) {
         super(entityId);
+        subscribe(new EstanteriaChange(this));
         this.productos = productos;
         this.surtidor = surtidor;
+    }
+
+    private Estanteria(EstanteriaId entityId){
+        super(entityId);
+        subscribe(new EstanteriaChange(this));
+    }
+
+    public static Estanteria from(EstanteriaId entityId, List<DomainEvent> events) {
+        var estanteria = new Estanteria(entityId);
+        events.forEach(estanteria::applyEvent);
+        return estanteria;
     }
 
     public void actualizarNombreSurtidor(Surtidor surtidor){
@@ -52,6 +63,6 @@ public class Estanteria extends AggregateEvent<EstanteriaId> {
 
     public Optional<Producto> getProductoporID(ProductoId productoId){
         return productos.stream()
-                .filter( item -> item.getProductoId().equals(productoId)).findFirst();
+                .filter( item -> item.identity().equals(productoId)).findFirst();
     }
 }
