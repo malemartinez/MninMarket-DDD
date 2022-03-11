@@ -2,17 +2,25 @@ package co.com.sofka.domain.carrito.eventos;
 
 import co.com.sofka.domain.carrito.Cajero;
 import co.com.sofka.domain.carrito.Cliente;
+import co.com.sofka.domain.carrito.valor.CajeroID;
+import co.com.sofka.domain.carrito.valor.Telefono;
 import co.com.sofka.domain.generic.DomainEvent;
 
 public class TelefonoCajeroActualizado extends DomainEvent {
 
-    private final Cajero cajero;
-    public TelefonoCajeroActualizado(Cajero cajero) {
+    private final CajeroID cajeroID;
+    private final Telefono telefono;
+    public TelefonoCajeroActualizado(CajeroID cajeroID,Telefono telefono) {
         super("TelefonoCajeroActualizado");
-        this.cajero=cajero;
+        this.cajeroID= cajeroID;
+        this.telefono = telefono;
     }
 
-    public Cajero getCliente() {
-        return cajero;
+    public CajeroID getCajeroID() {
+        return cajeroID;
+    }
+
+    public Telefono getTelefono() {
+        return telefono;
     }
 }

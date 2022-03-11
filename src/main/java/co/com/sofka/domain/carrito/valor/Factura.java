@@ -1,26 +1,19 @@
 package co.com.sofka.domain.carrito.valor;
 
-import co.com.sofka.domain.carrito.Cajero;
-import co.com.sofka.domain.carrito.Cliente;
-import co.com.sofka.domain.carrito.Producto;
 import co.com.sofka.domain.generic.ValueObject;
 
-import java.util.List;
+public class Factura implements ValueObject<FacturaID> {
 
-public class Factura implements ValueObject<facturaID> {
-
-    private final Cajero cajero;
-    private final Cliente cliente;
-    private final List<Producto> productos;
+    private final ClienteID clienteID;
+    private final CajeroID cajeroID;
+    private final Total pago;
     private final MetodoPago metodoPago;
 
-
-    public Factura(Cajero cajero, Cliente cliente, List<Producto> productos, MetodoPago metodoPago) {
-        this.cajero = cajero;
-        this.cliente = cliente;
-        this.productos = productos;
+    public Factura(ClienteID clienteID, CajeroID cajeroID, Total pago, MetodoPago metodoPago) {
+        this.clienteID = clienteID;
+        this.cajeroID = cajeroID;
+        this.pago = pago;
         this.metodoPago = metodoPago;
-
     }
 
     @Override
@@ -34,7 +27,7 @@ public class Factura implements ValueObject<facturaID> {
     }
 
     @Override
-    public facturaID value() {
+    public FacturaID value() {
 
         return null;
     }

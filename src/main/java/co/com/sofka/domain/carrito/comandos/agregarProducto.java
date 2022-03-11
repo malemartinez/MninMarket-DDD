@@ -6,7 +6,7 @@ import co.com.sofka.domain.generic.Command;
 public class agregarProducto extends Command {
 
     private final carritoID ID;
-    private final productoID entityId;
+    private final ProductoID entityId;
     private final Nombre nombre;
     private final Descripcion descripcion;
     private final Precio precio;
@@ -15,7 +15,7 @@ public class agregarProducto extends Command {
         return ID;
     }
 
-    public agregarProducto(carritoID ID, productoID entityId, Nombre nombre, Descripcion descripcion, Precio precio) {
+    public agregarProducto(carritoID ID, ProductoID entityId, Nombre nombre, Descripcion descripcion, Precio precio) {
         this.ID = ID;
         this.entityId = entityId;
         this.nombre = nombre;
@@ -23,7 +23,7 @@ public class agregarProducto extends Command {
         this.precio = precio;
     }
 
-    public productoID getEntityId() {
+    public ProductoID getEntityId() {
         return entityId;
     }
 

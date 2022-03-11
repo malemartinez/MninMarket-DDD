@@ -4,7 +4,6 @@ import co.com.sofka.domain.carrito.Cajero;
 import co.com.sofka.domain.carrito.Cliente;
 import co.com.sofka.domain.carrito.Producto;
 import co.com.sofka.domain.carrito.valor.MetodoPago;
-import co.com.sofka.domain.carrito.valor.carritoID;
 import co.com.sofka.domain.generic.Command;
 
 import java.util.List;

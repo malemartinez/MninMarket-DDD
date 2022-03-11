@@ -19,13 +19,12 @@ public class CarritoChange extends EventChange {
             carrito.cliente = new Cliente(event.getId(),event.getNombre(),event.getTelefono());
         });
 
-        apply((CarritoVaciado event )->{
-            carrito.productos.clear();
+        apply((CajeroCreado event)->{
+            carrito.cajero = new Cajero(event.getId(),event.getNombre(),event.getTelefono());
         });
 
-        apply((FacturaGenerada event)-> {
-            carrito.factura = new Factura(event.getCajero(),event.getCliente(),event.getProductos(),event.getMetodoPago());
-
+        apply((CarritoVaciado event )->{
+            carrito.productos.clear();
         });
 
         apply((ProductoAgregago event)-> {
@@ -41,6 +40,14 @@ public class CarritoChange extends EventChange {
 
         } );
 
+
+        apply((FacturaGenerada event)-> {
+            carrito.factura = new Factura(event.getClienteID(),event.getCajeroID(),event.getPago(),event.getMetodoPago());
+
+        });
+
+
+
         apply((NombreCajeroActualizado event)->{
             var Cajero = carrito.cajero;
             Cajero.actualizarNombre(event.getCajero().Nombre());
@@ -48,7 +55,7 @@ public class CarritoChange extends EventChange {
 
         apply((NombreClienteActualizado event)->{
             var Cliente = carrito.cliente;
-            Cliente.actualizarNombre(event.getCliente().Nombre());
+            Cliente.actualizarNombre(event.getNombre());
         });
 
         apply((TelefonoClienteActualizado event)->{
