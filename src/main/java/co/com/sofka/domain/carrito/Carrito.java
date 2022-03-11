@@ -2,10 +2,12 @@ package co.com.sofka.domain.carrito;
 
 import co.com.sofka.domain.carrito.eventos.*;
 import co.com.sofka.domain.carrito.valor.*;
+import co.com.sofka.domain.carrito.valor.productoID;
 import co.com.sofka.domain.generic.AggregateEvent;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Carrito extends AggregateEvent<carritoID> {
     protected Cajero cajero;
@@ -14,10 +16,11 @@ public class Carrito extends AggregateEvent<carritoID> {
     protected Factura factura;
     protected MetodoPago metodoPago;
 
-    public Carrito(carritoID entityId, Cajero cajero, Cliente cliente) {
+    public Carrito(carritoID entityId, Cajero cajero, Cliente cliente,List<Producto> productos) {
         super(entityId);
         this.cajero = cajero;
         this.cliente = cliente;
+        this.productos = productos;
         appendChange(new CarritoCreado(cajero,cliente)).apply();
     }
 
@@ -36,13 +39,16 @@ public class Carrito extends AggregateEvent<carritoID> {
 
     }
 
-    public void eliminarProducto(productoID entityId){
-        Objects.requireNonNull(entityId);
-        appendChange(new ProductoEliminado(entityId)).apply();
+    public void eliminarProducto(Producto producto){
+        Objects.requireNonNull(producto);
+        productos.remove(producto);
+
+        appendChange(new ProductoEliminado(producto.identity())).apply();
     }
 
     public void vaciarCarrito(List<Producto> productos){
-        //Objects.requireNonNull(entityId);
+        Objects.requireNonNull(productos);
+        productos.clear();
         appendChange(new CarritoVaciado(productos)).apply();
     }
 
@@ -72,6 +78,11 @@ public class Carrito extends AggregateEvent<carritoID> {
     public void actualizarTelefonoCajero(Cajero cajero){
         Objects.requireNonNull(cajero);
         appendChange(new TelefonoCajeroActualizado(cajero)).apply();
+    }
+
+    public Optional<Producto> getProductoPorID(productoID productoId){
+        return productos.stream()
+                .filter( item -> item.getProductoId().equals(productoId)).findFirst();
     }
 
     public Cajero Cajero() {
