@@ -33,14 +33,14 @@ public class Estanteria extends AggregateEvent<EstanteriaId> {
         return estanteria;
     }
 
-    public void actualizarNombreSurtidor(Surtidor surtidor){
-        Objects.requireNonNull(surtidor);
-        appendChange(new NombreSurtidorActualizado(surtidor)).apply();
+    public void actualizarNombreSurtidor(SurtidorId surtidorId, Nombre nombre){
+        Objects.requireNonNull(nombre);
+        appendChange(new NombreSurtidorActualizado(surtidorId, nombre)).apply();
     }
 
-    public void actualizarTelefonoSurtidor(Surtidor surtidor){
-        Objects.requireNonNull(surtidor);
-        appendChange(new TelefonoSurtidorActualizado(surtidor)).apply();
+    public void actualizarTelefonoSurtidor(SurtidorId surtidorId, Telefono telefono){
+        Objects.requireNonNull(telefono);
+        appendChange(new TelefonoSurtidorActualizado(surtidorId, telefono)).apply();
     }
 
     public void agregarProducto(ProductoId entityId, Nombre nombre, Descripcion descripcion, Precio precio){
