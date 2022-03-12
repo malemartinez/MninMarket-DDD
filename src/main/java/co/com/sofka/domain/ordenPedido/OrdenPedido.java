@@ -1,5 +1,6 @@
 package co.com.sofka.domain.ordenPedido;
 
+import co.com.sofka.domain.carrito.eventos.ClienteCreado;
 import co.com.sofka.domain.generic.AggregateEvent;
 
 import co.com.sofka.domain.generic.DomainEvent;
@@ -38,7 +39,15 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         return OrdenPedido;
     }
 
+    //Crear MiniMarket
+    public  void crearMiniMarket(TiendaId tiendaId, Nombre nombre, Telefono telefono, Direccion direccion){
+        appendChange(new MiniMarketCreado(tiendaId, nombre, telefono, direccion )).apply();
+    }
 
+    //Crear Proveedor
+    public void crearProveedor(ProveedorId proveedorId, Nombre nombre, Telefono telefono){
+        appendChange(new ProveedorCreado(proveedorId, nombre, telefono)).apply();
+    }
 
     public void agregarProducto(ProductoId entityId, Nombre nombre, Descripcion descripcion, Precio precio){
         Objects.requireNonNull(entityId);
