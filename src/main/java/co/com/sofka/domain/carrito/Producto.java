@@ -47,15 +47,15 @@ public class Producto extends Entity<ProductoID> {
         }
 
 
-        public Nombre getNombre() {
+        public Nombre nombre() {
                 return nombre;
         }
 
-        public Descripcion getDescripcion() {
+        public Descripcion descripcion() {
                 return descripcion;
         }
 
-        public Precio getPrecio() {
+        public Precio precio() {
                 return precio;
         }
 

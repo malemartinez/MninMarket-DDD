@@ -7,7 +7,6 @@ import co.com.sofka.domain.carrito.eventos.ClienteCreado;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -23,7 +22,8 @@ public class Carrito extends AggregateEvent<CarritoID> {
 
     public Carrito(CarritoID entityId , Total total ) {
            super(entityId);
-          appendChange(new CarritoCreado(entityId,total)).apply();}
+            subscribe(new CarritoChange(this));
+            appendChange(new CarritoCreado(entityId,total)).apply();}
 
     private Carrito(CarritoID entityId) {
         super(entityId);
@@ -81,7 +81,7 @@ public class Carrito extends AggregateEvent<CarritoID> {
     protected Double getProductPrice(){
         Double suma = 0.0;
         for ( Producto producto: productos) {
-              suma +=  producto.getPrecio().value();
+              suma +=  producto.precio().value();
         }
         return suma;
     }
@@ -113,23 +113,23 @@ public class Carrito extends AggregateEvent<CarritoID> {
 
 
 
-    public Cajero Cajero() {
+    public Cajero cajero() {
         return cajero;
     }
 
-    public Cliente Cliente() {
+    public Cliente cliente() {
         return cliente;
     }
 
-    public List<Producto> Productos() {
+    public List<Producto> productos() {
         return productos;
     }
 
-    public Factura Factura() {
+    public Factura factura() {
         return factura;
     }
 
-    public MetodoPago MetodoPago() {
+    public MetodoPago metodoPago() {
         return metodoPago;
     }
 }
