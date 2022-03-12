@@ -35,9 +35,13 @@ class AgregarProductoCarritoUseCaseTest {
         Nombre nombre = new Nombre("Caja de cereales");
         Descripcion descripcion = new Descripcion("Contiene trozitos ricos ");
         Precio precio = new Precio(50.52);
+
+
         var command = new agregarProducto(carritoID,productoID,nombre,descripcion,precio);
 
        var usecase = new AgregarProductoCarritoUseCase();
+
+
        Mockito.when(repository.getEventsBy("xxxx")).thenReturn(history());
        usecase.addRepository(repository);
         //act
