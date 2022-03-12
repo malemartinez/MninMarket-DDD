@@ -3,6 +3,7 @@ package co.com.sofka.domain.carrito;
 import co.com.sofka.domain.carrito.eventos.*;
 import co.com.sofka.domain.carrito.valor.Factura;
 import co.com.sofka.domain.carrito.eventos.ClienteCreado;
+import co.com.sofka.domain.carrito.valor.Total;
 import co.com.sofka.domain.generic.EventChange;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class CarritoChange extends EventChange {
 
         apply((CarritoCreado event) ->{
             carrito.productos = new ArrayList<>();
+            carrito.total = new Total(0.00);
         });
 
         apply((ClienteCreado event)->{
