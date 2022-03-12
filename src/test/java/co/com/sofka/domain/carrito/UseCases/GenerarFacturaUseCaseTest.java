@@ -4,8 +4,7 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.carrito.Producto;
-import co.com.sofka.domain.carrito.comandos.agregarProducto;
-import co.com.sofka.domain.carrito.comandos.generarFactura;
+import co.com.sofka.domain.carrito.comandos.GenerarFactura;
 import co.com.sofka.domain.carrito.eventos.CarritoCreado;
 import co.com.sofka.domain.carrito.eventos.FacturaGenerada;
 import co.com.sofka.domain.carrito.eventos.ProductoAgregago;
@@ -20,8 +19,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class GenerarFacturaUseCaseTest {
@@ -42,7 +39,7 @@ class GenerarFacturaUseCaseTest {
         productos.add(Producto.from(ProductoID.of("asfvr"), null,null,new Precio(755.25) ));
 
         Total precio = new Total(50.52);
-        var command = new generarFactura(cajero, cliente,productos,pago,carritoID,precio);
+        var command = new GenerarFactura(cajero, cliente,productos,pago,carritoID,precio);
 
         var usecase = new GenerarFacturaUseCase();
         Mockito.when(repository.getEventsBy("xxxx")).thenReturn(history());

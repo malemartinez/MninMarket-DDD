@@ -6,13 +6,13 @@ import co.com.sofka.domain.carrito.valor.CarritoID;
 import co.com.sofka.domain.carrito.valor.Telefono;
 import co.com.sofka.domain.generic.Command;
 
-public class actualizarTelefonoCajero extends Command {
+public class ActualizarTelefonoCajero extends Command {
 
     private final CarritoID ID;
     private final CajeroID cajeroID;
     private final Telefono telefono;
 
-    public actualizarTelefonoCajero(CarritoID ID, CajeroID cajeroID, Telefono telefono) {
+    public ActualizarTelefonoCajero(CarritoID ID, CajeroID cajeroID, Telefono telefono) {
         this.ID = ID;
         this.cajeroID = cajeroID;
         this.telefono = telefono;

@@ -8,7 +8,7 @@ import co.com.sofka.domain.generic.Command;
 
 import java.util.List;
 
-public class generarFactura extends Command {
+public class GenerarFactura extends Command {
 
     private final CarritoID ID;
     private final CajeroID cajeroID;
@@ -18,7 +18,7 @@ public class generarFactura extends Command {
     private  final Total total;
 
 
-    public generarFactura(CajeroID cajero, ClienteID cliente, List<Producto> productos, MetodoPago metodoPago,CarritoID ID,Total total ) {
+    public GenerarFactura(CajeroID cajero, ClienteID cliente, List<Producto> productos, MetodoPago metodoPago, CarritoID ID, Total total ) {
         this.cajeroID = cajero;
         this.clienteID = cliente;
         this.productos = productos;
