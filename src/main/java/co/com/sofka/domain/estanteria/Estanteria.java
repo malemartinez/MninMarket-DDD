@@ -19,15 +19,14 @@ public class Estanteria extends AggregateEvent<EstanteriaId> {
         super(entityId);
         subscribe(new EstanteriaChange(this));
         appendChange(new EstanteriaCreada(entityId));
-
     }
-
 
     public static Estanteria from(EstanteriaId entityId, List<DomainEvent> events) {
         var estanteria = new Estanteria(entityId);
         events.forEach(estanteria::applyEvent);
         return estanteria;
     }
+
     //crear Surtidor
     public void crearSurtidor(SurtidorId surtidorId, Nombre nombre, Telefono telefono){
         appendChange(new SurtidorCreado(surtidorId,nombre,telefono));
