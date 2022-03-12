@@ -12,11 +12,10 @@ public class EstanteriaChange extends EventChange {
 
         apply((EstanteriaCreada event) ->{
             estanteria.productos = new ArrayList<>();
-
         });
 
         apply((SurtidorCreado event)->{
-
+            estanteria.surtidor = new Surtidor(event.getSurtidorId(), event.getNombre(), event.getTelefono());
         });
 
         apply((NombreSurtidorActualizado event) ->{
