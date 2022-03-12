@@ -2,23 +2,31 @@ package co.com.sofka.domain.ordenPedido.comandos;
 
 import co.com.sofka.domain.generic.Command;
 import co.com.sofka.domain.ordenPedido.MiniMarket;
+import co.com.sofka.domain.ordenPedido.valor.Nombre;
 import co.com.sofka.domain.ordenPedido.valor.OrdenID;
+import co.com.sofka.domain.ordenPedido.valor.TiendaId;
 
 public class ActualizarNombreMinimarket extends Command {
 
     private final OrdenID ordenID;
-    private final MiniMarket miniMarket;
+    private final TiendaId tiendaId;
+    private final Nombre nombre;
 
-    public ActualizarNombreMinimarket(OrdenID ordenID, MiniMarket miniMarket) {
+    public ActualizarNombreMinimarket(OrdenID ordenID, TiendaId tiendaId, Nombre nombre) {
         this.ordenID = ordenID;
-        this.miniMarket = miniMarket;
+        this.tiendaId = tiendaId;
+        this.nombre = nombre;
     }
 
     public OrdenID getOrdenID() {
         return ordenID;
     }
 
-    public MiniMarket getMiniMarket() {
-        return miniMarket;
+    public TiendaId getTiendaId() {
+        return tiendaId;
+    }
+
+    public Nombre getNombre() {
+        return nombre;
     }
 }

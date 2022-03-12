@@ -2,24 +2,32 @@ package co.com.sofka.domain.estanteria.comandos;
 
 import co.com.sofka.domain.estanteria.Surtidor;
 import co.com.sofka.domain.estanteria.valor.EstanteriaId;
+import co.com.sofka.domain.estanteria.valor.SurtidorId;
+import co.com.sofka.domain.estanteria.valor.Telefono;
 import co.com.sofka.domain.generic.Command;
 import co.com.sofka.domain.generic.Entity;
 
 public class actualizarTelefonoSurtidor extends Command {
 
     private final EstanteriaId id;
-    private final Surtidor surtidor;
+    private final SurtidorId surtidorId;
+    private final Telefono telefono;
 
-    public actualizarTelefonoSurtidor(EstanteriaId id, Surtidor surtidor) {
+    public actualizarTelefonoSurtidor(EstanteriaId id, SurtidorId surtidorId, Telefono telefono) {
         this.id = id;
-        this.surtidor = surtidor;
+        this.surtidorId = surtidorId;
+        this.telefono = telefono;
     }
 
     public EstanteriaId getId() {
         return id;
     }
 
-    public Surtidor getSurtidor() {
-        return surtidor;
+    public SurtidorId getSurtidorId() {
+        return surtidorId;
+    }
+
+    public Telefono getTelefono() {
+        return telefono;
     }
 }
