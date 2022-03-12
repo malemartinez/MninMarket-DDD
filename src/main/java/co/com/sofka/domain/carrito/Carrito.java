@@ -106,9 +106,11 @@ public class Carrito extends AggregateEvent<CarritoID> {
         appendChange(new TelefonoCajeroActualizado(id, telefono)).apply();
     }
 
-    protected Optional<Producto> getProductoPorID(ProductoID productoId){
+    protected Producto getProductoPorID(ProductoID productoId){
         return productos.stream()
-                .filter( item -> item.identity().equals(productoId)).findFirst();
+                .filter( item -> item.identity().equals(productoId)).findFirst()
+                .orElseThrow(()-> new RuntimeException("No se encuentra el producto"));
+
     }
 
 

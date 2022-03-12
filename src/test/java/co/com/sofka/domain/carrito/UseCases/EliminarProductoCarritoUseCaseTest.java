@@ -4,12 +4,14 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.carrito.Carrito;
-import co.com.sofka.domain.carrito.comandos.agregarProducto;
-import co.com.sofka.domain.carrito.comandos.eliminarProducto;
+import co.com.sofka.domain.carrito.comandos.EliminarProducto;
+
+
 import co.com.sofka.domain.carrito.eventos.CarritoCreado;
 import co.com.sofka.domain.carrito.eventos.ProductoAgregago;
 import co.com.sofka.domain.carrito.eventos.ProductoEliminado;
 import co.com.sofka.domain.carrito.valor.*;
+
 import co.com.sofka.domain.generic.DomainEvent;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,30 +33,34 @@ class EliminarProductoCarritoUseCaseTest {
         //arrange
         CarritoID carritoID = CarritoID.of("xxxx");
 
-        Carrito carrito = new Carrito(carritoID, new Total(0.00));
-
-        //var commando2 = new agregarProducto(carritoID, );
-        carrito.agregarProducto(ProductoID.of("dhgtr"), new Nombre("galletas"),new Descripcion("Ricas y deliciossas"),new Precio(185.25));
-        carrito.agregarProducto(ProductoID.of("fearer"), new Nombre("pudin"),new Descripcion("Ricas y deliciossas"),new Precio(2585.25));
-        carrito.agregarProducto(ProductoID.of("asfvr"), new Nombre("panes"),new Descripcion("Ricas y deliciossas"),new Precio(755.25));
-
-        ProductoID productoEliminar = ProductoID.of("dhgtr");
-       var command = new eliminarProducto(productoEliminar , carritoID);
+       var command = new EliminarProducto(ProductoID.of("dhgtr") , carritoID);
 
        var usecase = new EliminarProductoCarritoUseCase();
 
         //act
 
+        Mockito.when(repository.getEventsBy("xxxx")).thenReturn(history());
+        usecase.addRepository(repository);
+        //act
+
         var events = UseCaseHandler.getInstance()
+                .setIdentifyExecutor(carritoID.value())
                 .syncExecutor(usecase, new RequestCommand<>(command))
                 .orElseThrow()
                 .getDomainEvents();
         //assert
 
-        var event = (ProductoEliminado) events.get(0);
-       Assertions.assertEquals("productoEliminado", event.type);
-
-
+        var event = (ProductoEliminado) events.get(events.size() - 1);
+        Assertions.assertEquals("productoEliminado", event.type);
+        Assertions.assertEquals("dhgtr",event.getEntityId().value());
 
     }
+
+
+    private List<DomainEvent> history() {
+        return List.of(
+                new CarritoCreado(CarritoID.of("xxxx"),null),
+                new ProductoAgregago(ProductoID.of("ffffff"),null,null,null)
+
+        );    }
 }

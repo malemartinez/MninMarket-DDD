@@ -55,7 +55,7 @@ class AgregarProductoCarritoUseCaseTest {
         Assertions.assertEquals("sofka.Carrito.Productoagregago", event.type);
         Assertions.assertEquals("Caja de cereales", event.getNombre().value()  );
         Assertions.assertEquals("ffffff", event.getEntityId().value()  );
-        //TODO: colocar las demas validaciones
+
     }
 
     private List<DomainEvent> history() {
