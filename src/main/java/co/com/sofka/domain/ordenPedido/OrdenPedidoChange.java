@@ -45,13 +45,14 @@ public class OrdenPedidoChange extends EventChange {
         });
 
         apply((ProductoAgregado event) -> {
-            ordenPedido.agregarProducto(event.getEntityId(),event.getNombre(),event.getDescripcion(),event.getPrecio());
+            var NuevoProducto = new Producto(event.getEntityId(),event.getPrecio(),event.getNombre(),event.getDescripcion());
+            ordenPedido.productos.add(NuevoProducto);
         });
 
         apply((ProductoEliminado event) -> {
             var productoEliminar = ordenPedido.getProductoporID(event.getEntityId())
                     .orElseThrow(()-> new IllegalArgumentException("No se encontró el producto"));
-            ordenPedido.eliminarProducto(productoEliminar.identity());
+            ordenPedido.productos.remove(productoEliminar);
         });
 
         apply((TelefonoMinimarketActualizado event) -> {
