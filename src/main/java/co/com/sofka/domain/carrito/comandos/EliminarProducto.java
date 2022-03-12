@@ -7,7 +7,7 @@ import co.com.sofka.domain.generic.Command;
 public class EliminarProducto extends Command {
 
     private final CarritoID ID;
-    private final Producto producto;
+    private final ProductoID producto;
 
     public EliminarProducto(Producto producto, CarritoID ID) {
         this.producto = producto;
