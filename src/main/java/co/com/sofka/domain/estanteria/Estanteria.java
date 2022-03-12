@@ -65,4 +65,8 @@ public class Estanteria extends AggregateEvent<EstanteriaId> {
         return productos.stream()
                 .filter( item -> item.identity().equals(productoId)).findFirst();
     }
+
+    public Surtidor surtidor() {
+        return surtidor;
+    }
 }
