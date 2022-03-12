@@ -3,7 +3,6 @@ package co.com.sofka.domain.carrito.UseCases;
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
-import co.com.sofka.domain.carrito.Carrito;
 import co.com.sofka.domain.carrito.comandos.EliminarProducto;
 
 
@@ -33,9 +32,9 @@ class EliminarProductoCarritoUseCaseTest {
         //arrange
         CarritoID carritoID = CarritoID.of("xxxx");
 
-       var command = new EliminarProducto(ProductoID.of("dhgtr") , carritoID);
+        var command = new EliminarProducto(ProductoID.of("dhgtr") , carritoID);
 
-       var usecase = new EliminarProductoCarritoUseCase();
+        var usecase = new EliminarProductoCarritoUseCase();
 
         //act
 
@@ -60,7 +59,9 @@ class EliminarProductoCarritoUseCaseTest {
     private List<DomainEvent> history() {
         return List.of(
                 new CarritoCreado(CarritoID.of("xxxx"),null),
-                new ProductoAgregago(ProductoID.of("ffffff"),null,null,null)
+                new ProductoAgregago(ProductoID.of("dhgtr"), new Nombre("galletas"),new Descripcion("Ricas y deliciossas"),new Precio(185.25)),
+                new ProductoAgregago(ProductoID.of("fearer"), new Nombre("pudin"),new Descripcion("Ricas y deliciossas"),new Precio(2585.25)),
+                new ProductoAgregago(ProductoID.of("asfvr"), new Nombre("panes"), new Descripcion("Ricas y deliciossas"), new Precio(755.25))
 
         );    }
 }
