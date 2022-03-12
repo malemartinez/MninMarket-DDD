@@ -13,11 +13,21 @@ public class Surtidor extends Entity<SurtidorId> {
     private Nombre nombre;
     private Telefono telefono;
 
-    public Surtidor(SurtidorId entityId, SurtidorId surtidorId, Nombre nombre, Telefono telefono) {
-        super(entityId);
-        this.surtidorId = surtidorId;
+    protected Surtidor(SurtidorId surtidorId, Nombre nombre, Telefono telefono) {
+        super(surtidorId);
         this.nombre = nombre;
         this.telefono = telefono;
+    }
+
+    private Surtidor(SurtidorId surtidorId){
+        super(surtidorId);
+    }
+
+    public static Surtidor from(SurtidorId surtidorId, Nombre nombre, Telefono telefono){
+        Surtidor nuevoSurtidor = new Surtidor(surtidorId);
+        nuevoSurtidor.nombre = nombre;
+        nuevoSurtidor.telefono = telefono;
+        return nuevoSurtidor;
     }
 
     public void actualizarNombre(Nombre nuevoNombre){
@@ -28,15 +38,15 @@ public class Surtidor extends Entity<SurtidorId> {
         this.telefono = Objects.requireNonNull(nuevoTelefono);
     }
 
-    public SurtidorId getSurtidorId() {
+    public SurtidorId surtidorId() {
         return surtidorId;
     }
 
-    public Nombre getNombre() {
+    public Nombre nombre() {
         return nombre;
     }
 
-    public Telefono getTelefono() {
+    public Telefono telefono() {
         return telefono;
     }
 }

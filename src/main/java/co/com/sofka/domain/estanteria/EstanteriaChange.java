@@ -17,7 +17,7 @@ public class EstanteriaChange extends EventChange {
 
         apply((NombreSurtidorActualizado event) ->{
             var surtidor = estanteria.surtidor;
-            surtidor.actualizarNombre(event.getSurtidor().getNombre());
+            surtidor.actualizarNombre(event.getSurtidor().nombre());
             estanteria.surtidor = surtidor;
 
         });
@@ -48,7 +48,7 @@ public class EstanteriaChange extends EventChange {
 
         apply((TelefonoSurtidorActualizado event) ->{
             var surtidor = estanteria.surtidor;
-            surtidor.actualizarTelefono(event.getSurtidor().getTelefono());
+            surtidor.actualizarTelefono(event.getSurtidor().telefono());
         });
     }
 }
