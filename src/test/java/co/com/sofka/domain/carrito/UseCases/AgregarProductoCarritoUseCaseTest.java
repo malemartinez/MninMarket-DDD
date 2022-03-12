@@ -3,7 +3,7 @@ package co.com.sofka.domain.carrito.UseCases;
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
-import co.com.sofka.domain.carrito.comandos.agregarProducto;
+import co.com.sofka.domain.carrito.comandos.AgregarProducto;
 import co.com.sofka.domain.carrito.eventos.CarritoCreado;
 import co.com.sofka.domain.carrito.eventos.ProductoAgregago;
 import co.com.sofka.domain.carrito.valor.*;
@@ -16,8 +16,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class AgregarProductoCarritoUseCaseTest {
@@ -37,7 +35,7 @@ class AgregarProductoCarritoUseCaseTest {
         Precio precio = new Precio(50.52);
 
 
-        var command = new agregarProducto(carritoID,productoID,nombre,descripcion,precio);
+        var command = new AgregarProducto(carritoID,productoID,nombre,descripcion,precio);
 
        var usecase = new AgregarProductoCarritoUseCase();
 

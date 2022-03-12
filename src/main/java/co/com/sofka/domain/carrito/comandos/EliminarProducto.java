@@ -4,12 +4,12 @@ import co.com.sofka.domain.carrito.Producto;
 import co.com.sofka.domain.carrito.valor.CarritoID;
 import co.com.sofka.domain.generic.Command;
 
-public class eliminarProducto extends Command {
+public class EliminarProducto extends Command {
 
     private final CarritoID ID;
     private final Producto producto;
 
-    public eliminarProducto(Producto producto,CarritoID ID) {
+    public EliminarProducto(Producto producto, CarritoID ID) {
         this.producto = producto;
         this.ID = ID;
     }

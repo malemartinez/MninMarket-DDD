@@ -3,7 +3,7 @@ package co.com.sofka.domain.carrito.comandos;
 import co.com.sofka.domain.carrito.valor.*;
 import co.com.sofka.domain.generic.Command;
 
-public class agregarProducto extends Command {
+public class AgregarProducto extends Command {
 
     private final CarritoID ID;
     private final ProductoID entityId;
@@ -15,7 +15,7 @@ public class agregarProducto extends Command {
         return ID;
     }
 
-    public agregarProducto(CarritoID ID, ProductoID entityId, Nombre nombre, Descripcion descripcion, Precio precio) {
+    public AgregarProducto(CarritoID ID, ProductoID entityId, Nombre nombre, Descripcion descripcion, Precio precio) {
         this.ID = ID;
         this.entityId = entityId;
         this.nombre = nombre;
