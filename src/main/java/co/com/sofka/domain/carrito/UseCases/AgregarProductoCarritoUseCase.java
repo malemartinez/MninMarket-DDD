@@ -7,13 +7,13 @@ import co.com.sofka.domain.carrito.Carrito;
 import co.com.sofka.domain.carrito.Producto;
 import co.com.sofka.domain.carrito.comandos.agregarProducto;
 
-public class AgregarProductoCarrito extends UseCase<RequestCommand<agregarProducto>, ResponseEvents> {
+public class AgregarProductoCarritoUseCase extends UseCase<RequestCommand<agregarProducto>, ResponseEvents> {
     @Override
     public void executeUseCase(RequestCommand<agregarProducto> input) {
         var command = input.getCommand();
 
-        //var carrito = Carrito.from(command.getID(),retrieveEvents());
-        //Producto producto = new Producto(command.getEntityId(),command.getNombre(),command.getDescripcion(),command.getPrecio());
-        //emit().onResponse(new ResponseEvents(carrito.getUncommittedChanges()));
+        var carrito = Carrito.from(command.getID(),retrieveEvents());
+        carrito.agregarProducto(command.getEntityId(), command.getNombre(), command.getDescripcion(), command.getPrecio());
+        emit().onResponse(new ResponseEvents(carrito.getUncommittedChanges()));
     }
 }
