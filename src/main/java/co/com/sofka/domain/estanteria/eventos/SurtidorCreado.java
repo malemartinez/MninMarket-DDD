@@ -1,16 +1,19 @@
 package co.com.sofka.domain.estanteria.eventos;
 
+import co.com.sofka.domain.estanteria.valor.Nombre;
 import co.com.sofka.domain.estanteria.valor.SurtidorId;
 import co.com.sofka.domain.estanteria.valor.Telefono;
 import co.com.sofka.domain.generic.DomainEvent;
 
-public class TelefonoSurtidorActualizado extends DomainEvent {
+public class SurtidorCreado extends DomainEvent {
 
     private final SurtidorId surtidorId;
+    private final Nombre nombre;
     private final Telefono telefono;
 
-    public TelefonoSurtidorActualizado(SurtidorId surtidorId, Telefono telefono) {
-        super("sofka.estanteria.TelefonoSurtidorActualizado");
+    public SurtidorCreado(SurtidorId surtidorId, Nombre nombre, Telefono telefono) {
+        super("sofka.Estanteria.SurtidorCreado");
+        this.nombre= nombre;
         this.surtidorId = surtidorId;
         this.telefono = telefono;
     }
@@ -19,7 +22,11 @@ public class TelefonoSurtidorActualizado extends DomainEvent {
         return surtidorId;
     }
 
-    public Telefono telefono() {
+    public Nombre getNombre() {
+        return nombre;
+    }
+
+    public Telefono getTelefono() {
         return telefono;
     }
 }

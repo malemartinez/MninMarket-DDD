@@ -9,20 +9,10 @@ import java.util.List;
 
 public class EstanteriaCreada extends DomainEvent {
 
-    private final List<Producto> productos;
-    private final Surtidor surtidor;
 
-    public EstanteriaCreada(EstanteriaId entityId, List<Producto> productos, Surtidor surtidor) {
+    public EstanteriaCreada(EstanteriaId entityId) {
         super("sofka.estanteria.EstanteriaCreada");
-        this.productos = productos;
-        this.surtidor = surtidor;
+
     }
 
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public Surtidor getSurtidor() {
-        return surtidor;
-    }
 }

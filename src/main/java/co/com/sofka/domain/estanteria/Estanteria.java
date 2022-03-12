@@ -15,22 +15,22 @@ public class Estanteria extends AggregateEvent<EstanteriaId> {
     protected List<Producto> productos;
     protected Surtidor surtidor;
 
-    public Estanteria(EstanteriaId entityId, List<Producto> productos, Surtidor surtidor) {
+    public Estanteria(EstanteriaId entityId) {
         super(entityId);
         subscribe(new EstanteriaChange(this));
-        this.productos = productos;
-        this.surtidor = surtidor;
+        appendChange(new EstanteriaCreada(entityId));
+
     }
 
-    private Estanteria(EstanteriaId entityId){
-        super(entityId);
-        subscribe(new EstanteriaChange(this));
-    }
 
     public static Estanteria from(EstanteriaId entityId, List<DomainEvent> events) {
         var estanteria = new Estanteria(entityId);
         events.forEach(estanteria::applyEvent);
         return estanteria;
+    }
+    //crear Surtidor
+    public void crearSurtidor(SurtidorId surtidorId, Nombre nombre, Telefono telefono){
+        appendChange(new SurtidorCreado(surtidorId,nombre,telefono));
     }
 
     public void actualizarNombreSurtidor(SurtidorId surtidorId, Nombre nombre){
