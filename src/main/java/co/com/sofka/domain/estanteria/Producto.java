@@ -16,13 +16,24 @@ public class Producto extends Entity<ProductoId> {
     private Descripcion descripcion;
     private Nombre nombre;
 
-    public Producto(ProductoId entityId, Precio precio, Nombre nombre, Descripcion descripcion) {
-        super(entityId);
+    protected Producto(ProductoId productoId, Precio precio, Nombre nombre, Descripcion descripcion) {
+        super(productoId);
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
 
+    private Producto(ProductoId productoId){
+        super(productoId);
+    }
+
+    public static Producto from(ProductoId productoId, Precio precio, Nombre nombre, Descripcion descripcion){
+        Producto nuevoProducto = new Producto(productoId);
+        nuevoProducto.precio = precio;
+        nuevoProducto.nombre = nombre;
+        nuevoProducto.descripcion = descripcion;
+        return nuevoProducto;
+    }
 
     public void actualizarNombre(Nombre nuevoNombre){
         this.nombre = Objects.requireNonNull(nuevoNombre);
@@ -36,19 +47,19 @@ public class Producto extends Entity<ProductoId> {
         this.descripcion = Objects.requireNonNull(nuevaDescripcion);
     }
 
-    public ProductoId getProductoId() {
+    public ProductoId productoId() {
         return productoId;
     }
 
-    public Precio getPrecio() {
+    public Precio precio() {
         return precio;
     }
 
-    public Descripcion getDescripcion() {
+    public Descripcion descripcion() {
         return descripcion;
     }
 
-    public Nombre getNombre() {
+    public Nombre nombre() {
         return nombre;
     }
 }

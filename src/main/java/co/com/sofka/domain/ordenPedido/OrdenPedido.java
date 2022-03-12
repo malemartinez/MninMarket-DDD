@@ -56,29 +56,29 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         appendChange(new ProductoEliminado(entityId)).apply();
     }
 
-    public void actualizarNombreProveedor(){
-        Objects.requireNonNull(proveedor);
-        appendChange(new NombreProveedorActualizado(proveedor)).apply();
+    public void actualizarNombreProveedor(ProveedorId proveedorId, Nombre nombre){
+        Objects.requireNonNull(nombre);
+        appendChange(new NombreProveedorActualizado(proveedorId, nombre)).apply();
     }
 
-    public void actualizarTelefonoProveedor(){
-        Objects.requireNonNull(proveedor);
-        appendChange(new TelefonoProveedorActualizado(proveedor)).apply();
+    public void actualizarTelefonoProveedor(ProveedorId proveedorId, Telefono telefono){
+        Objects.requireNonNull(telefono);
+        appendChange(new TelefonoProveedorActualizado(proveedorId, telefono)).apply();
     }
 
-    public void actualizarNombreMinimarket(){
-        Objects.requireNonNull(miniMarket);
-        appendChange(new NombreMinimarketActualizado(miniMarket)).apply();
+    public void actualizarNombreMinimarket(TiendaId tiendaId, Nombre nombre){
+        Objects.requireNonNull(nombre);
+        appendChange(new NombreMinimarketActualizado(tiendaId, nombre)).apply();
     }
 
-    public void actualizarTelefonoMinimarket(){
-        Objects.requireNonNull(miniMarket);
-        appendChange(new TelefonoMinimarketActualizado(miniMarket)).apply();
+    public void actualizarTelefonoMinimarket(TiendaId tiendaId, Telefono telefono){
+        Objects.requireNonNull(telefono);
+        appendChange(new TelefonoMinimarketActualizado(tiendaId, telefono)).apply();
     }
 
-    public void actualizarDireccionMinimarket(){
-        Objects.requireNonNull(miniMarket);
-        appendChange(new DireccionMinimarketActualizado(miniMarket)).apply();
+    public void actualizarDireccionMinimarket(TiendaId tiendaId, Direccion direccion){
+        Objects.requireNonNull(direccion);
+        appendChange(new DireccionMinimarketActualizado(tiendaId, direccion)).apply();
     }
 
     public void actualizarPrecioProducto(ProductoId productoId , Precio precio){
