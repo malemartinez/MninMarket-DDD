@@ -2,6 +2,7 @@ package co.com.sofka.domain.ordenPedido;
 
 import co.com.sofka.domain.generic.EventChange;
 import co.com.sofka.domain.ordenPedido.eventos.*;
+import co.com.sofka.domain.ordenPedido.valor.Fecha;
 
 import java.util.ArrayList;
 
@@ -10,28 +11,31 @@ public class OrdenPedidoChange extends EventChange {
     public OrdenPedidoChange(OrdenPedido ordenPedido) {
 
         apply((OrdenPedidoCreado event) -> {
-            ordenPedido.fecha = event.getFecha();
-            ordenPedido.miniMarket = event.getMiniMarket();
+            ordenPedido.fecha = new Fecha();
             ordenPedido.productos = new ArrayList<>();
-            ordenPedido.proveedor = event.getProveedor();
+        });
+
+        apply((MiniMarketCreado event) -> {
+            ordenPedido.miniMarket = new MiniMarket(event.getTiendaId(), event.getNombre(), event.getTelefono(), event.getDireccion());
+        });
+
+        apply((ProveedorCreado event) -> {
+            ordenPedido.proveedor = new Proveedor(event.getProveedorId(), event.getNombre(), event.getTelefono());
         });
 
         apply((DireccionMinimarketActualizado event) -> {
-            var miniMarket = ordenPedido.miniMarket;
-            miniMarket.actualizarDireccion(event.getMiniMarket().direccion());
-            ordenPedido.miniMarket = miniMarket;
+            var minimarket = ordenPedido.miniMarket;
+            minimarket.actualizarDireccion(event.getDireccion());
         });
 
         apply((NombreMinimarketActualizado event) -> {
             var miniMarket = ordenPedido.miniMarket;
-            miniMarket.actualizarNombre(event.getMiniMarket().nombre());
-            ordenPedido.miniMarket = miniMarket;
+            miniMarket.actualizarNombre(event.getNombre());
         });
 
         apply((NombreProveedorActualizado event) -> {
             var proveedor = ordenPedido.proveedor;
-            proveedor.actualizarNombre(event.getProveedor().Nombre());
-            ordenPedido.proveedor = proveedor;
+            proveedor.actualizarNombre(event.getNombre());
         });
 
         apply((PrecioProductoActualizado event) ->{
@@ -52,14 +56,12 @@ public class OrdenPedidoChange extends EventChange {
 
         apply((TelefonoMinimarketActualizado event) -> {
             var Minimarket = ordenPedido.miniMarket;
-            Minimarket.actualizarTelefono(event.getMiniMarket().telefono());
-            ordenPedido.miniMarket = Minimarket;
+            Minimarket.actualizarTelefono(event.getTelefono());
         });
 
         apply((TelefonoProveedorActualizado event) ->{
             var Proveedor = ordenPedido.proveedor;
-            Proveedor.actualizarTelefono(event.getProveedor().Telefono());
-            ordenPedido.proveedor = Proveedor;
+            Proveedor.actualizarTelefono(event.getTelefono());
         });
     }
 }
