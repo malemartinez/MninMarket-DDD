@@ -10,13 +10,13 @@ import co.com.sofka.domain.generic.Command;
 public class ActualizarNombreCliente extends Command {
 
     private final CarritoID ID;
-    private final ClienteID cliente;
+
     private final Nombre nombre;
 
 
-    public ActualizarNombreCliente(CarritoID ID, ClienteID cliente, Nombre nombre) {
+    public ActualizarNombreCliente(CarritoID ID, Nombre nombre) {
         this.ID = ID;
-        this.cliente = cliente;
+
         this.nombre = nombre;
     }
 
@@ -24,9 +24,7 @@ public class ActualizarNombreCliente extends Command {
         return ID;
     }
 
-    public ClienteID getCliente() {
-        return cliente;
-    }
+
 
     public Nombre getNombre() {
         return nombre;

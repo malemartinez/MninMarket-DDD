@@ -60,7 +60,7 @@ public class CarritoChange extends EventChange {
         });
 
         apply((NombreClienteActualizado event)->{
-            carrito.cliente().actualizarNombre(event.getNombre());
+            carrito.cliente.actualizarNombre(event.getNombre());
 
 
         });

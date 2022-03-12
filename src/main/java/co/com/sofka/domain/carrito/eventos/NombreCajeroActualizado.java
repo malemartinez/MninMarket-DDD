@@ -7,19 +7,17 @@ import co.com.sofka.domain.generic.DomainEvent;
 
 public class NombreCajeroActualizado extends DomainEvent {
 
-    private final CajeroID cajeroID;
+
     private  final Nombre nombre;
 
-    public NombreCajeroActualizado(CajeroID cajeroID,Nombre nombre) {
+    public NombreCajeroActualizado(Nombre nombre) {
         super("sofka.Carrito.NombreCajeroActualizado");
-        this.cajeroID = cajeroID;
+
         this.nombre=nombre;
 
     }
 
-    public CajeroID getCajeroID() {
-        return cajeroID;
-    }
+
 
     public Nombre getNombre() {
         return nombre;

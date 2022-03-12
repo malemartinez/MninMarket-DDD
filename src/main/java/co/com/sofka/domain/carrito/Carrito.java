@@ -86,24 +86,24 @@ public class Carrito extends AggregateEvent<CarritoID> {
         return suma;
     }
 
-    public void actualizarNombreCliente(ClienteID id, Nombre nombre){
+    public void actualizarNombreCliente(Nombre nombre){
         Objects.requireNonNull(nombre);
-        appendChange(new NombreClienteActualizado(id, nombre)).apply();
+        appendChange(new NombreClienteActualizado(nombre)).apply();
     }
 
-    public void actualizarTelefonoCliente(ClienteID id, Telefono telefono){
+    public void actualizarTelefonoCliente(Telefono telefono){
         Objects.requireNonNull(telefono);
-        appendChange(new TelefonoClienteActualizado(id, telefono)).apply();
+        appendChange(new TelefonoClienteActualizado(telefono)).apply();
     }
 
-    public void actualizarNombreCajero(CajeroID id, Nombre nombre){
+    public void actualizarNombreCajero( Nombre nombre){
         Objects.requireNonNull(nombre);
-        appendChange(new NombreCajeroActualizado(id, nombre)).apply();
+        appendChange(new NombreCajeroActualizado(nombre)).apply();
     }
 
-    public void actualizarTelefonoCajero(CajeroID id, Telefono telefono){
+    public void actualizarTelefonoCajero(Telefono telefono){
         Objects.requireNonNull(telefono);
-        appendChange(new TelefonoCajeroActualizado(id, telefono)).apply();
+        appendChange(new TelefonoCajeroActualizado(telefono)).apply();
     }
 
     protected Producto getProductoPorID(ProductoID productoId){

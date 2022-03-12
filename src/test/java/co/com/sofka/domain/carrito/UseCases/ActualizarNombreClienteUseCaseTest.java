@@ -6,12 +6,10 @@ import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.carrito.comandos.ActualizarNombreCliente;
 import co.com.sofka.domain.carrito.eventos.CarritoCreado;
+import co.com.sofka.domain.carrito.eventos.ClienteCreado;
 import co.com.sofka.domain.carrito.eventos.NombreClienteActualizado;
 import co.com.sofka.domain.carrito.eventos.ProductoAgregago;
-import co.com.sofka.domain.carrito.valor.CarritoID;
-import co.com.sofka.domain.carrito.valor.ClienteID;
-import co.com.sofka.domain.carrito.valor.Nombre;
-import co.com.sofka.domain.carrito.valor.ProductoID;
+import co.com.sofka.domain.carrito.valor.*;
 import co.com.sofka.domain.generic.DomainEvent;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,10 +32,9 @@ class ActualizarNombreClienteUseCaseTest {
    void actualizarNombreCliente(){
        //arrange
        CarritoID carritoID = CarritoID.of("xxxx");
-       ClienteID clienteID = ClienteID.of("hgsvfrcgh");
        Nombre nombre = new Nombre("Aleja");
 
-       var command = new ActualizarNombreCliente(carritoID,clienteID,nombre);
+       var command = new ActualizarNombreCliente(carritoID,nombre);
        var usecase = new ActualizarNombreClienteUseCase();
 
        Mockito.when(repository.getEventsBy("xxxx")).thenReturn(history());
@@ -51,19 +48,18 @@ class ActualizarNombreClienteUseCaseTest {
                .getDomainEvents();
        //assert
 
-       var event =  events;
-       System.out.println(event.get(0));
+       var event = (NombreClienteActualizado) events.get(0);
 
-       //Assertions.assertEquals("sofka.Carrito.NombreClienteActualizado", event.type);
-       //Assertions.assertEquals("Aleja", event.getNombre().value() );
-
+       Assertions.assertEquals("sofka.Carrito.NombreClienteActualizado", event.type);
+       Assertions.assertEquals("Aleja", event.getNombre().value() );
+        Mockito.verify(repository).getEventsBy("xxxx");
 
    }
 
    private List<DomainEvent> history() {
        return List.of(
                new CarritoCreado(CarritoID.of("xxxx"),null),
-               new ProductoAgregago(ProductoID.of("ffffff"),null,null,null),
-               new NombreClienteActualizado(ClienteID.of("ghjdh"), new Nombre("Jose"))
+               new ClienteCreado(ClienteID.of("gggg"),new Nombre("bbbb"), new Telefono("11111") )
+
        );    }
 }

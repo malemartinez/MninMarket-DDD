@@ -18,6 +18,7 @@ class CrearCarritoUseCaseTest {
         //arrange
         CarritoID carritoID = new CarritoID();
         Total total = new Total(0.0);
+
         var command = new CrearCarrito(carritoID, total);
         var usecase = new CrearCarritoUseCase();
         //act

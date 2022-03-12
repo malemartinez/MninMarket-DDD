@@ -13,7 +13,7 @@ public class ActualizarNombreCajeroUseCase extends UseCase<RequestCommand<Actual
         var command = input.getCommand();
 
         var carrito = Carrito.from(command.getID(),retrieveEvents());
-        carrito.actualizarNombreCajero(command.getCajero(),command.getNombre());
+        carrito.actualizarNombreCajero(command.getNombre());
         emit().onResponse(new ResponseEvents(carrito.getUncommittedChanges()));
     }
 }

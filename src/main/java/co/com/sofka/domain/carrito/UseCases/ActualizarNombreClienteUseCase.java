@@ -16,10 +16,9 @@ public class ActualizarNombreClienteUseCase extends UseCase<RequestCommand<Actua
     public void executeUseCase(RequestCommand<ActualizarNombreCliente> input) {
         var command = input.getCommand();
 
-        var carrito = Carrito.from(command.getID(),retrieveEvents());
+        var carrito = Carrito.from(command.getID(),retrieveEvents(command.getID().value()));
 
-        carrito.crearCliente(ClienteID.of("hgsvfrcgh"),new Nombre("Oscar"), new Telefono("1254875"));
-        //carrito.actualizarNombreCliente(command.getCliente(),command.getNombre());
+        carrito.actualizarNombreCliente(command.getNombre());
         emit().onResponse(new ResponseEvents(carrito.getUncommittedChanges()));
     }
 }

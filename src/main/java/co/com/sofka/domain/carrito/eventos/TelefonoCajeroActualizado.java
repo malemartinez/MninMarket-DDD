@@ -8,17 +8,15 @@ import co.com.sofka.domain.generic.DomainEvent;
 
 public class TelefonoCajeroActualizado extends DomainEvent {
 
-    private final CajeroID cajeroID;
+
     private final Telefono telefono;
-    public TelefonoCajeroActualizado(CajeroID cajeroID,Telefono telefono) {
+    public TelefonoCajeroActualizado(Telefono telefono) {
         super("TelefonoCajeroActualizado");
-        this.cajeroID= cajeroID;
+
         this.telefono = telefono;
     }
 
-    public CajeroID getCajeroID() {
-        return cajeroID;
-    }
+
 
     public Telefono getTelefono() {
         return telefono;
