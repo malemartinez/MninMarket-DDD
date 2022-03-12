@@ -11,7 +11,7 @@ public class ClienteCreado extends DomainEvent {
     private final Telefono telefono;
 
     public ClienteCreado(ClienteID id , Nombre nombre, Telefono telefono) {
-        super("ClienteCreado");
+        super("Sofka.Carrito.ClienteCreado");
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
