@@ -9,7 +9,7 @@ public class TotalCalculado extends DomainEvent {
 
     public TotalCalculado(Total total) {
         super("sofka.carrito.TotalCalculado");
-        this.total = total;
+        this.total=total;
     }
 
     public Total getTotal() {

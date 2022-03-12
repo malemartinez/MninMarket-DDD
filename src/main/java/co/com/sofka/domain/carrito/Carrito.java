@@ -74,8 +74,10 @@ public class Carrito extends AggregateEvent<CarritoID> {
         appendChange(new FacturaGenerada(clienteID,cajeroID,pago,metodoPago)).apply();
     }
 
-    public void calcularTotal(Total total){
-        appendChange(new TotalCalculado(total)).apply();
+    public void calcularTotal(){
+        var total = getProductPrice();
+        var sumaTotal = new Total(total);
+        appendChange(new TotalCalculado(sumaTotal)).apply();
     }
 
     protected Double getProductPrice(){
