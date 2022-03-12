@@ -15,7 +15,7 @@ public class FacturaGenerada extends DomainEvent {
     private final MetodoPago metodoPago;
 
     public FacturaGenerada(ClienteID clienteID, CajeroID cajeroID, Total pago, MetodoPago metodoPago) {
-        super("sofks.carrito.FacturaGenerada");
+        super("sofka.carrito.FacturaGenerada");
         this.clienteID = clienteID;
         this.cajeroID = cajeroID;
         this.pago = pago;
