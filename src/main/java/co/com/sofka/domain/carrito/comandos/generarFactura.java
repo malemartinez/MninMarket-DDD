@@ -3,8 +3,7 @@ package co.com.sofka.domain.carrito.comandos;
 import co.com.sofka.domain.carrito.Cajero;
 import co.com.sofka.domain.carrito.Cliente;
 import co.com.sofka.domain.carrito.Producto;
-import co.com.sofka.domain.carrito.valor.CarritoID;
-import co.com.sofka.domain.carrito.valor.MetodoPago;
+import co.com.sofka.domain.carrito.valor.*;
 import co.com.sofka.domain.generic.Command;
 
 import java.util.List;
@@ -12,30 +11,36 @@ import java.util.List;
 public class generarFactura extends Command {
 
     private final CarritoID ID;
-    private final Cajero cajero;
-    private final Cliente cliente;
+    private final CajeroID cajeroID;
+    private final ClienteID clienteID;
     private final List<Producto> productos;
     private final MetodoPago metodoPago;
+    private  final Total total;
 
 
-    public generarFactura(Cajero cajero, Cliente cliente, List<Producto> productos, MetodoPago metodoPago,CarritoID ID ) {
-        this.cajero = cajero;
-        this.cliente = cliente;
+    public generarFactura(CajeroID cajero, ClienteID cliente, List<Producto> productos, MetodoPago metodoPago,CarritoID ID,Total total ) {
+        this.cajeroID = cajero;
+        this.clienteID = cliente;
         this.productos = productos;
         this.metodoPago = metodoPago;
         this.ID = ID;
+        this.total=total;
     }
 
     public CarritoID getID() {
         return ID;
     }
 
-    public Cajero getCajero() {
-        return cajero;
+    public CajeroID getCajeroID() {
+        return cajeroID;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public ClienteID getClienteID() {
+        return clienteID;
+    }
+
+    public Total getTotal() {
+        return total;
     }
 
     public List<Producto> getProductos() {
