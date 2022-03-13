@@ -57,7 +57,6 @@ class GenerarFacturaUseCaseTest {
         Assertions.assertEquals("sofka.carrito.FacturaGenerada", event.type);
         Assertions.assertEquals(cliente, event.getClienteID()  );
         Assertions.assertEquals( pago, event.getMetodoPago()  );
-        //TODO: colocar las demas validaciones
     }
 
     private List<DomainEvent> history() {
