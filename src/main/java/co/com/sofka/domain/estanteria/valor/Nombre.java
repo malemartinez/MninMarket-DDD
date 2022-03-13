@@ -9,7 +9,6 @@ public class Nombre implements ValueObject<String> {
 
     public Nombre(String nombre) {
         this.nombre = nombre;
-
     }
 
     @Override

@@ -3,6 +3,7 @@ package co.com.sofka.domain.carrito;
 import co.com.sofka.domain.carrito.eventos.*;
 import co.com.sofka.domain.carrito.valor.Factura;
 import co.com.sofka.domain.carrito.eventos.ClienteCreado;
+import co.com.sofka.domain.carrito.valor.MetodoPago;
 import co.com.sofka.domain.carrito.valor.Total;
 import co.com.sofka.domain.generic.EventChange;
 
@@ -75,7 +76,14 @@ public class CarritoChange extends EventChange {
         apply((TelefonoCajeroActualizado event)->{
             var Cajero = carrito.cajero;
             Cajero.actualizarTelefono(event.getTelefono());
+        });
 
+        apply((MetodoPagoElegido event) ->{
+            carrito.metodoPago = new MetodoPago(event.getMetodoPago().value());
+        });
+
+        apply((TotalConDescuentoAsignado event) -> {
+            carrito.total = new Total(event.getTotal().value());
         });
     }
 }

@@ -3,13 +3,11 @@ package co.com.sofka.domain.carrito.UseCases;
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
-import co.com.sofka.domain.carrito.comandos.CrearCarrito;
-import co.com.sofka.domain.carrito.comandos.CrearCliente;
+import co.com.sofka.domain.carrito.comandos.ElegirMetodoPago;
 import co.com.sofka.domain.carrito.eventos.CarritoCreado;
-import co.com.sofka.domain.carrito.eventos.ClienteCreado;
-import co.com.sofka.domain.carrito.eventos.NombreClienteActualizado;
-import co.com.sofka.domain.carrito.eventos.ProductoAgregago;
-import co.com.sofka.domain.carrito.valor.*;
+import co.com.sofka.domain.carrito.eventos.MetodoPagoElegido;
+import co.com.sofka.domain.carrito.valor.CarritoID;
+import co.com.sofka.domain.carrito.valor.MetodoPago;
 import co.com.sofka.domain.generic.DomainEvent;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,27 +18,24 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
-class CrearClienteUseCaseTest {
-
+class ElegirMetodoPagoUseCaseTest {
 
     @Mock
     private DomainEventRepository repository;
 
     @Test
-    void crearCliente(){
+    void elegirMetodoPago(){
         //arrange
         CarritoID carritoID = CarritoID.of("xxxx");
-        ClienteID clienteID = ClienteID.of("hgseh");
+        MetodoPago metodoPago = new MetodoPago(MetodoPago.Pago.EFECTIVO);
 
-        var command = new CrearCliente(clienteID,carritoID,new Nombre("Aleja"),new Telefono("25847"));
-        var usecase = new CrearClienteUseCase();
-        //act
+        var command = new ElegirMetodoPago(carritoID, metodoPago);
+        var usecase = new ElegirMetodoPagoUseCase();
 
         Mockito.when(repository.getEventsBy("xxxx")).thenReturn(history());
         usecase.addRepository(repository);
+        //act
 
         var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor(carritoID.value())
@@ -48,16 +43,19 @@ class CrearClienteUseCaseTest {
                 .orElseThrow()
                 .getDomainEvents();
         //assert
-        var event = (ClienteCreado)events.get(0);
-        Assertions.assertEquals("Sofka.Carrito.ClienteCreado", event.type);
-        //Assertions.assertEquals(carritoID.value(),event.aggregateRootId());
+
+        var event = (MetodoPagoElegido) events.get(0);
+
+        Assertions.assertEquals("sofka.carrito.MetodoPagoElegido", event.type);
+        Assertions.assertEquals(metodoPago, event.getMetodoPago() );
+        Mockito.verify(repository).getEventsBy("xxxx");
+
     }
 
     private List<DomainEvent> history() {
         return List.of(
-                new CarritoCreado(CarritoID.of("xxxx"),null),
-                new ProductoAgregago(ProductoID.of("ffffff"),null,null,null),
-                new ClienteCreado(ClienteID.of("hgseh"),new Nombre("Camilito"), new Telefono("154278"))
-        );
-    }
+                new CarritoCreado(CarritoID.of("xxxx"),null)
+
+        );    }
+
 }
