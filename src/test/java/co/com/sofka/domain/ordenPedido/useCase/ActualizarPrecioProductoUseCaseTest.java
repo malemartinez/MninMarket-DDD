@@ -4,10 +4,13 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofka.domain.ordenPedido.comandos.ActualizarNombreProveedor;
-import co.com.sofka.domain.ordenPedido.eventos.NombreProveedorActualizado;
+
+import co.com.sofka.domain.ordenPedido.comandos.ActualizarPrecioProducto;
+import co.com.sofka.domain.ordenPedido.comandos.AgregarProducto;
+
 import co.com.sofka.domain.ordenPedido.eventos.OrdenPedidoCreado;
-import co.com.sofka.domain.ordenPedido.eventos.ProveedorCreado;
+import co.com.sofka.domain.ordenPedido.eventos.PrecioProductoActualizado;
+
 import co.com.sofka.domain.ordenPedido.valor.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,22 +21,27 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 @ExtendWith(MockitoExtension.class)
-class ActualizarNombreProveedorUseCaseTest {
+class ActualizarPrecioProductoUseCaseTest {
 
     @Mock
     private DomainEventRepository repository;
 
     @Test
-    void actualizaNombreProveedor(){
+    void actualizarPrecioProducto(){
         //arrange
         OrdenID ordenID = OrdenID.of("xxxx");
-        Nombre nombre = new Nombre("Juan");
 
-        var command = new ActualizarNombreProveedor(ordenID, nombre);
-        var usecase = new ActualizarNombreProveedorUseCase();
+        var agregarProducto = new AgregarProducto(ordenID, ProductoId.of("ghfrg"),
+                new Nombre("Galletas"),
+                new Descripcion("trozoss"),
+                new Precio(1457.11) );
+
+        var command = new ActualizarPrecioProducto(ordenID, ProductoId.of("ghfrg"),new Precio(20.144));
+
+        var usecase = new ActualizarPrecioProductoUseCase();
 
         Mockito.when(repository.getEventsBy("xxxx")).thenReturn(history());
         usecase.addRepository(repository);
@@ -46,18 +54,18 @@ class ActualizarNombreProveedorUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var event = (NombreProveedorActualizado) events.get(0);
-        System.out.println(event);
-        Assertions.assertEquals("sofka.ordenPedido.NombreProveedorActualizado", event.type);
-        Assertions.assertEquals("Juan", event.getNombre().value() );
+        var event = (PrecioProductoActualizado) events.get(events.size() -1);
+
+        Assertions.assertEquals("sofka.ordenPedido.PrecioProductoActualizado", event.type);
+        Assertions.assertEquals( 20.144 , event.getPrecio().value());
         Mockito.verify(repository).getEventsBy("xxxx");
 
     }
 
     private List<DomainEvent> history() {
         return List.of(
-                new OrdenPedidoCreado(OrdenID.of("xxxx"), new Fecha()),
-                new ProveedorCreado(ProveedorId.of("gggg"),new Nombre("bbbb"), new Telefono("12345"))
+                new OrdenPedidoCreado(OrdenID.of("xxxx"), new Fecha())
+
 
         );
     }
