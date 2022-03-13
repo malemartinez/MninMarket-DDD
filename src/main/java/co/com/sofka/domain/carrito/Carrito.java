@@ -115,6 +115,9 @@ public class Carrito extends AggregateEvent<CarritoID> {
 
     }
 
+    public void elegirMetodoPago(MetodoPago metodoPago){
+        appendChange(new MetodoPagoElegido(metodoPago));
+    }
 
 
     public Cajero cajero() {
