@@ -12,31 +12,19 @@ import java.util.List;
 public class OrdenPedidoCreado extends DomainEvent {
 
     private final Fecha fecha;
-    private final MiniMarket miniMarket;
-    private final List<Producto> productos;
-    private final Proveedor proveedor;
-
-    public OrdenPedidoCreado(OrdenID entityId, Fecha fecha, MiniMarket miniMarket, List<Producto> productos, Proveedor proveedor) {
+    private final OrdenID ordenID;
+    public OrdenPedidoCreado(OrdenID entityId, Fecha fecha) {
         super("sofka.ordenPedido.OrdenPedidoCreado");
         this.fecha = fecha;
-        this.miniMarket = miniMarket;
-        this.productos = productos;
-        this.proveedor = proveedor;
+        this.ordenID = entityId;
+
     }
 
     public Fecha getFecha() {
         return fecha;
     }
 
-    public MiniMarket getMiniMarket() {
-        return miniMarket;
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public Proveedor getProveedor() {
-        return proveedor;
+    public OrdenID getOrdenID() {
+        return ordenID;
     }
 }

@@ -9,12 +9,11 @@ import co.com.sofka.domain.ordenPedido.valor.ProveedorId;
 public class ActualizarNombreProveedor extends Command {
 
     private final OrdenID ordenID;
-    private final ProveedorId proveedorId;
     private final Nombre nombre;
 
-    public ActualizarNombreProveedor(OrdenID ordenID, ProveedorId proveedorId, Nombre nombre) {
+    public ActualizarNombreProveedor(OrdenID ordenID, Nombre nombre) {
         this.ordenID = ordenID;
-        this.proveedorId = proveedorId;
+
         this.nombre = nombre;
     }
 
@@ -22,9 +21,6 @@ public class ActualizarNombreProveedor extends Command {
         return ordenID;
     }
 
-    public ProveedorId getProveedorId() {
-        return proveedorId;
-    }
 
     public Nombre getNombre() {
         return nombre;

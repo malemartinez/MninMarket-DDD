@@ -7,18 +7,15 @@ import co.com.sofka.domain.ordenPedido.valor.ProveedorId;
 
 public class NombreProveedorActualizado extends DomainEvent {
 
-    private final ProveedorId proveedorId;
+
     private final Nombre nombre;
 
-    public NombreProveedorActualizado(ProveedorId proveedorId, Nombre nombre) {
+    public NombreProveedorActualizado(Nombre nombre) {
         super("sofka.ordenPedido.NombreProveedorActualizado");
-        this.proveedorId = proveedorId;
+
         this.nombre = nombre;
     }
 
-    public ProveedorId getProveedorId() {
-        return proveedorId;
-    }
 
     public Nombre getNombre() {
         return nombre;

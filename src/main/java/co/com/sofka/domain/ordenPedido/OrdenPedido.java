@@ -20,12 +20,11 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
     protected List<Producto> productos;
     protected Proveedor proveedor;
 
-    public OrdenPedido(OrdenID entityId, Fecha fecha, MiniMarket miniMarket, List<Producto> productos, Proveedor proveedor) {
+    public OrdenPedido(OrdenID entityId, Fecha fecha) {
         super(entityId);
         this.fecha = fecha;
-        this.miniMarket = miniMarket;
-        this.productos = productos;
-        this.proveedor = proveedor;
+        subscribe(new OrdenPedidoChange(this));
+        appendChange(new OrdenPedidoCreado(entityId,fecha));
     }
 
     private OrdenPedido(OrdenID entityId){
@@ -65,9 +64,9 @@ public class OrdenPedido extends AggregateEvent<OrdenID> {
         appendChange(new ProductoEliminado(entityId)).apply();
     }
 
-    public void actualizarNombreProveedor(ProveedorId proveedorId, Nombre nombre){
+    public void actualizarNombreProveedor( Nombre nombre){
         Objects.requireNonNull(nombre);
-        appendChange(new NombreProveedorActualizado(proveedorId, nombre)).apply();
+        appendChange(new NombreProveedorActualizado( nombre)).apply();
     }
 
     public void actualizarTelefonoProveedor(ProveedorId proveedorId, Telefono telefono){
