@@ -47,7 +47,7 @@ class ActualizarNombreProveedorUseCaseTest {
 
         //assert
         var event = (NombreProveedorActualizado) events.get(0);
-
+        System.out.println(event);
         Assertions.assertEquals("sofka.ordenPedido.NombreProveedorActualizado", event.type);
         Assertions.assertEquals("Juan", event.getNombre().value() );
         Mockito.verify(repository).getEventsBy("xxxx");

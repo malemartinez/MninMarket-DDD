@@ -10,21 +10,17 @@ import co.com.sofka.domain.generic.Entity;
 public class actualizarTelefonoSurtidor extends Command {
 
     private final EstanteriaId id;
-    private final SurtidorId surtidorId;
+
     private final Telefono telefono;
 
-    public actualizarTelefonoSurtidor(EstanteriaId id, SurtidorId surtidorId, Telefono telefono) {
+    public actualizarTelefonoSurtidor(EstanteriaId id, Telefono telefono) {
         this.id = id;
-        this.surtidorId = surtidorId;
+
         this.telefono = telefono;
     }
 
     public EstanteriaId getId() {
         return id;
-    }
-
-    public SurtidorId getSurtidorId() {
-        return surtidorId;
     }
 
     public Telefono getTelefono() {

@@ -37,9 +37,9 @@ public class Estanteria extends AggregateEvent<EstanteriaId> {
         appendChange(new NombreSurtidorActualizado(surtidorId, nombre)).apply();
     }
 
-    public void actualizarTelefonoSurtidor(SurtidorId surtidorId, Telefono telefono){
+    public void actualizarTelefonoSurtidor( Telefono telefono){
         Objects.requireNonNull(telefono);
-        appendChange(new TelefonoSurtidorActualizado(surtidorId, telefono)).apply();
+        appendChange(new TelefonoSurtidorActualizado( telefono)).apply();
     }
 
     public void agregarProducto(ProductoId entityId, Nombre nombre, Descripcion descripcion, Precio precio){

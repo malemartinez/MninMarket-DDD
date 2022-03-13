@@ -4,13 +4,13 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofka.domain.ordenPedido.comandos.ActualizarNombreProveedor;
+
 import co.com.sofka.domain.ordenPedido.comandos.ActualizarPrecioProducto;
 import co.com.sofka.domain.ordenPedido.comandos.AgregarProducto;
-import co.com.sofka.domain.ordenPedido.eventos.NombreProveedorActualizado;
+
 import co.com.sofka.domain.ordenPedido.eventos.OrdenPedidoCreado;
 import co.com.sofka.domain.ordenPedido.eventos.PrecioProductoActualizado;
-import co.com.sofka.domain.ordenPedido.eventos.ProveedorCreado;
+
 import co.com.sofka.domain.ordenPedido.valor.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 @ExtendWith(MockitoExtension.class)
 class ActualizarPrecioProductoUseCaseTest {
