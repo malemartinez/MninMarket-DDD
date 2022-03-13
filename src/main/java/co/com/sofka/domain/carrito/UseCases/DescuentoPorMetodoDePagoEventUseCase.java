@@ -16,13 +16,15 @@ public class DescuentoPorMetodoDePagoEventUseCase extends UseCase<TriggeredEvent
     @Override
     public void executeUseCase(TriggeredEvent<MetodoPagoElegido> metodoPagoElegidoTriggeredEvent) {
         var event = metodoPagoElegidoTriggeredEvent.getDomainEvent();
-        var carrito = Carrito.from(CarritoID.of("xxxx"), this.retrieveEvents());
-        if (carrito.metodoPago().equals(MetodoPago.Pago.TARJETA)) {
-            carrito.calcularTotal();
+
+        var carrito = Carrito.from( event.getCarritoID() ,retrieveEvents());
+        carrito.elegirMetodoPago(event.getCarritoID(),event.getMetodoPago());
+        if (carrito.metodoPago().value().equals(MetodoPago.Pago.EFECTIVO)) {
+
             var totalCompra = carrito.total().value();
             var totalConDescuento = totalCompra - (totalCompra * descuento);
             carrito.asignarTotalConDescuento(new Total(totalConDescuento));
             emit().onResponse(new ResponseEvents(carrito.getUncommittedChanges()));
         }
-    }
-}
+    }}
+

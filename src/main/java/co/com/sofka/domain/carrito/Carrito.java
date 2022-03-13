@@ -114,8 +114,8 @@ public class Carrito extends AggregateEvent<CarritoID> {
 
     }
 
-    public void elegirMetodoPago(MetodoPago metodoPago){
-        appendChange(new MetodoPagoElegido(metodoPago));
+    public void elegirMetodoPago(CarritoID carritoID,MetodoPago metodoPago){
+        appendChange(new MetodoPagoElegido(carritoID,metodoPago));
     }
 
     public void asignarTotalConDescuento(Total total){

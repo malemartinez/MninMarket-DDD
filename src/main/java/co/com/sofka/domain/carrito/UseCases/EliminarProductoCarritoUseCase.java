@@ -17,7 +17,6 @@ public class EliminarProductoCarritoUseCase extends UseCase<RequestCommand<Elimi
 
         var carrito = Carrito.from(command.getID(),retrieveEvents());
 
-        carrito.agregarProducto(ProductoID.of("dhgtr"), new Nombre("galletas"),new Descripcion("Ricas y deliciossas"),new Precio(185.25));
         carrito.eliminarProducto(command.getProducto());
         emit().onResponse(new ResponseEvents(carrito.getUncommittedChanges()));
 }}

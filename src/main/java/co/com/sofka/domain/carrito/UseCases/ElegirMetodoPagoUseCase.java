@@ -12,7 +12,7 @@ public class ElegirMetodoPagoUseCase extends UseCase<RequestCommand<ElegirMetodo
         var command = elegirMetodoPagoRequestCommand.getCommand();
 
         var carrito = Carrito.from(command.getCarritoID(),retrieveEvents());
-        carrito.elegirMetodoPago(command.getMetodoPago());
+        carrito.elegirMetodoPago(command.getCarritoID(),command.getMetodoPago());
         emit().onResponse(new ResponseEvents(carrito.getUncommittedChanges()));
     }
 }
