@@ -81,5 +81,9 @@ public class CarritoChange extends EventChange {
         apply((MetodoPagoElegido event) ->{
             carrito.metodoPago = new MetodoPago(event.getMetodoPago().value());
         });
+
+        apply((TotalConDescuentoAsignado event) -> {
+            carrito.total = new Total(event.getTotal().value());
+        });
     }
 }

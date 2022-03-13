@@ -58,5 +58,6 @@ class CrearClienteUseCaseTest {
                 new CarritoCreado(CarritoID.of("xxxx"),null),
                 new ProductoAgregago(ProductoID.of("ffffff"),null,null,null),
                 new ClienteCreado(ClienteID.of("hgseh"),new Nombre("Camilito"), new Telefono("154278"))
-        );    }
+        );
+    }
 }

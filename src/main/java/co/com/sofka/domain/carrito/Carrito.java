@@ -9,7 +9,6 @@ import co.com.sofka.domain.generic.DomainEvent;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Carrito extends AggregateEvent<CarritoID> {
 
@@ -119,6 +118,10 @@ public class Carrito extends AggregateEvent<CarritoID> {
         appendChange(new MetodoPagoElegido(metodoPago));
     }
 
+    public void asignarTotalConDescuento(Total total){
+        appendChange(new TotalConDescuentoAsignado(total)).apply();
+    }
+
 
     public Cajero cajero() {
         return cajero;
@@ -138,5 +141,9 @@ public class Carrito extends AggregateEvent<CarritoID> {
 
     public MetodoPago metodoPago() {
         return metodoPago;
+    }
+
+    public Total total() {
+        return total;
     }
 }
